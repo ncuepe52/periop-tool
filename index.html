@@ -1,0 +1,933 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="圍術期抗栓與風險藥品停藥查詢：CHEST 2022、AHA/ACC 2024 與員林基督教醫院院內準則對照">
+<style>:root{color-scheme:light}*,*::before,*::after{box-sizing:border-box}body{margin:0;background:#F3F6F5}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>圍術期抗栓停藥查詢</title>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#F3F6F5; --panel:#FFFFFF; --panel2:#EAF0EE; --ink:#13201D; --ink2:#4A5A56; --line:#D3DDDA;
+  --accent:#0E6A61; --accent-ink:#FFFFFF; --accent-soft:#D8ECE8;
+  --take:#3E8E5A; --take-soft:#DDEFE2; --hold:#C23A2E; --hold-soft:#F7DEDA;
+  --opt:#C98A12; --opt-soft:#F7EACD; --bridge:#6E4A9E; --bridge-soft:#E7DDF3;
+  --info:#2D5F8E; --info-soft:#DCE8F4;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1614; --panel:#16211E; --panel2:#1D2A27; --ink:#E4EDEA; --ink2:#9DB0AB; --line:#2C3B37;
+    --accent:#3FB3A5; --accent-ink:#06231F; --accent-soft:#173833;
+    --take:#5DBB7C; --take-soft:#1B3325; --hold:#EF6A5C; --hold-soft:#3C1E1A;
+    --opt:#E6B04A; --opt-soft:#3A2E14; --bridge:#B08FE0; --bridge-soft:#2D2340;
+    --info:#7DB2E6; --info-soft:#1A2B3D;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1614; --panel:#16211E; --panel2:#1D2A27; --ink:#E4EDEA; --ink2:#9DB0AB; --line:#2C3B37;
+  --accent:#3FB3A5; --accent-ink:#06231F; --accent-soft:#173833;
+  --take:#5DBB7C; --take-soft:#1B3325; --hold:#EF6A5C; --hold-soft:#3C1E1A;
+  --opt:#E6B04A; --opt-soft:#3A2E14; --bridge:#B08FE0; --bridge-soft:#2D2340;
+  --info:#7DB2E6; --info-soft:#1A2B3D;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:1180px;margin:0 auto}
+header.top{padding-block:22px 14px;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:flex-end;justify-content:space-between;border-bottom:2px solid var(--accent)}
+header.top h1{margin:0;font-size:clamp(22px,3.2vw,30px);font-weight:900;letter-spacing:.02em;text-wrap:balance}
+header.top h1 small{display:block;font-size:13px;font-weight:500;color:var(--ink2);letter-spacing:.04em;margin-top:2px}
+.srcchips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:12px;padding:3px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:700;white-space:nowrap}
+.disclaimer{margin:12px 0 18px;padding:10px 14px;background:var(--opt-soft);border-left:4px solid var(--opt);font-size:13.5px;color:var(--ink)}
+.disclaimer b{color:var(--opt)}
+.grid{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+.step{margin-bottom:16px}
+.step h2{font-size:15px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.step h2 .n{font-family:var(--mono);font-size:12px;background:var(--accent);color:var(--accent-ink);border-radius:4px;padding:1px 7px}
+input[type=search],input[type=number],input[type=date],select{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:7px 10px;width:100%}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#surgs{max-height:430px;overflow-y:auto;padding-right:4px;border-bottom:1px solid var(--line);padding-bottom:8px}
+
+.risk-head{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;color:var(--ink2);margin:10px 0 6px;letter-spacing:.04em}
+.dot{width:10px;height:10px;border-radius:50%;flex:none}
+.dot.H{background:var(--hold)}.dot.L{background:var(--opt)}.dot.M{background:var(--take)}
+.surglist{display:flex;flex-wrap:wrap;gap:6px}
+.sbtn{font:inherit;font-size:13.5px;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:5px 9px;line-height:1.35}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn[aria-pressed=true]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.sbtn .tag{font-size:10.5px;font-weight:700;margin-left:4px;opacity:.75}
+.drugtabs{display:flex;flex-direction:column;gap:8px}
+.dgroup{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.dgroup .glabel{font-size:12px;color:var(--ink2);width:100%;font-weight:700;letter-spacing:.04em}
+.dbtn{font:inherit;font-size:14px;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:6px 11px}
+.dbtn small{color:var(--ink2);font-size:11.5px}
+.dbtn[aria-pressed=true]{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.dbtn[aria-pressed=true] small{color:var(--panel);opacity:.8}
+.field{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.field label,.flabel{font-size:12.5px;font-weight:700;color:var(--ink2)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.seg{display:flex;flex-wrap:wrap;gap:4px}
+.seg button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:5px 9px}
+.seg button[aria-pressed=true]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:700}
+details.mini{font-size:13px;margin-top:4px}
+details.mini summary{cursor:pointer;color:var(--accent);font-weight:700}
+.cg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
+@media (max-width:420px){.cg{grid-template-columns:1fr 1fr}}
+.cg input,.cg select{padding:5px 6px}
+.hint{font-size:12px;color:var(--ink2)}
+.check{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;margin:6px 0}
+.check input{margin-top:4px}
+
+/* result */
+.result{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px)}
+@media (max-width:900px){.result{position:static}}
+.rhead{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;margin-bottom:12px}
+.rhead h2{margin:0;font-size:20px;font-weight:900}
+.rhead .vs{color:var(--ink2);font-size:14px}
+.badge{font-size:12px;font-weight:700;padding:2px 8px;border-radius:4px}
+.badge.H{background:var(--hold-soft);color:var(--hold)}.badge.L{background:var(--opt-soft);color:var(--opt)}.badge.M{background:var(--take-soft);color:var(--take)}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px}
+@media (max-width:520px){.kpis{grid-template-columns:1fr}}
+.kpi{background:var(--panel2);border-radius:8px;padding:10px 12px}
+.kpi .k{font-size:12px;color:var(--ink2);font-weight:700;letter-spacing:.04em}
+.kpi .v{font-size:22px;font-weight:900;line-height:1.25;margin-top:2px}
+.kpi .s{font-size:12.5px;color:var(--ink2);margin-top:2px}
+.kpi.hold .v{color:var(--hold)}.kpi.take .v{color:var(--take)}.kpi.bridge .v{color:var(--bridge)}
+.tlwrap{overflow-x:auto;margin-bottom:6px;border:1px solid var(--line);border-radius:8px}
+table.tl{border-collapse:collapse;width:100%;min-width:560px;font-size:12px}
+table.tl th,table.tl td{border-right:1px solid var(--line);text-align:center;padding:5px 2px}
+table.tl th:last-child,table.tl td:last-child{border-right:0}
+table.tl thead th{background:var(--panel2);font-family:var(--mono);font-weight:600;font-size:11.5px}
+table.tl thead th .date{display:block;font-family:var(--sans);font-weight:500;color:var(--ink2);font-size:10.5px}
+table.tl th.rowl{text-align:left;padding-left:8px;font-family:var(--sans);font-size:12px;white-space:nowrap;background:var(--panel);min-width:84px}
+table.tl .d0{outline:2px solid var(--ink);outline-offset:-2px}
+table.tl td{height:40px;font-weight:700}
+.st-take{background:var(--take-soft);color:var(--take)}
+.st-hold{background:var(--hold-soft);color:var(--hold)}
+.st-opt{background:repeating-linear-gradient(135deg,var(--opt-soft) 0 6px,var(--panel) 6px 11px);color:var(--opt)}
+.st-full{background:var(--bridge-soft);color:var(--bridge)}
+.st-half{background:linear-gradient(90deg,var(--bridge-soft) 50%,var(--panel) 50%);color:var(--bridge)}
+.st-low{background:repeating-linear-gradient(135deg,var(--bridge-soft) 0 6px,var(--panel) 6px 11px);color:var(--bridge)}
+.st-none{background:var(--panel);color:var(--ink2);font-weight:400}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--ink2);margin:8px 0 14px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{display:inline-block;width:16px;height:12px;border-radius:2px;border:1px solid var(--line)}
+.alert{border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:14px}
+.alert.red{background:var(--hold-soft);border-left:4px solid var(--hold)}
+.alert.amber{background:var(--opt-soft);border-left:4px solid var(--opt)}
+.alert.blue{background:var(--info-soft);border-left:4px solid var(--info)}
+.alert.green{background:var(--take-soft);border-left:4px solid var(--take)}
+.alert b.t{display:block;margin-bottom:2px}
+h3.sec{font-size:14px;margin:16px 0 8px;letter-spacing:.04em;color:var(--ink2);border-bottom:1px solid var(--line);padding-bottom:4px}
+ul.notes{margin:0;padding-left:20px}
+ul.notes li{margin-bottom:6px}
+.ref{font-family:var(--mono);font-size:11px;color:var(--accent);background:var(--accent-soft);border-radius:3px;padding:0 5px;margin-left:4px;white-space:nowrap;font-weight:600}
+.ev{font-size:11px;color:var(--ink2);margin-left:4px;white-space:nowrap}
+.datebar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:10px;font-size:13px}
+.datebar input{width:auto}
+.hourbar{display:grid;grid-template-columns:repeat(8,1fr);gap:2px;margin:8px 0 4px}
+.hourbar div{padding:8px 2px;text-align:center;font-size:11.5px;font-weight:700;border-radius:3px}
+.hourlbl{display:grid;grid-template-columns:repeat(8,1fr);gap:2px;font-family:var(--mono);font-size:10.5px;color:var(--ink2);text-align:center}
+
+/* reference sections */
+section.ref-sec{margin-top:26px}
+section.ref-sec>h2{font-size:18px;font-weight:900;margin:0 0 10px}
+.tbwrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+table.rt{border-collapse:collapse;width:100%;font-size:13px;min-width:640px}
+table.rt th,table.rt td{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+table.rt thead th{background:var(--panel2);font-size:12.5px}
+table.rt td.num{font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:12px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.pcard{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:13.5px;display:flex;flex-direction:column;gap:4px}
+.pcard .pt{font-weight:700;font-size:14px}
+.pcard .pm{font-size:12px;color:var(--ink2)}
+.pcard .pk{font-size:13px}
+.pcard a{color:var(--accent);font-family:var(--mono);font-size:12px;word-break:break-all}
+.ptype{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.06em}
+footer{margin-top:30px;font-size:12px;color:var(--ink2);border-top:1px solid var(--line);padding-top:12px}
+.linkbtn{margin-left:auto;font:inherit;font-size:12px;color:var(--accent);background:none;border:1px solid var(--line);border-radius:4px;padding:1px 8px;cursor:pointer}
+.dbtn[aria-pressed=true]::before{content:"✓ ";}
+table.rt.sum{min-width:560px}
+table.tl tr.grp th,table.tl tr.grp td{border-top:2px solid var(--ink2)}
+details.drugd{border:1px solid var(--line);border-radius:8px;margin-bottom:8px;background:var(--panel)}
+details.drugd>summary{cursor:pointer;padding:9px 12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14.5px}
+details.drugd .dbody{padding:0 12px 10px}
+.srcchip,.hstat{white-space:nowrap}
+table.rt.sum td:first-child{min-width:150px}
+.srcchip{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:4px;background:var(--accent-soft);color:var(--accent)}
+.srcchip.hosp{background:var(--info-soft);color:var(--info)}
+.rsub{display:block;font-size:10px;font-weight:500;color:var(--ink2)}
+tr.hrow td{height:30px;font-size:11px;border-top:2px dashed var(--line)}
+tr.hrow th{border-top:2px dashed var(--line)}
+.hstat{font-size:11.5px;font-weight:700;padding:1px 8px;border-radius:4px;letter-spacing:0}
+.hstat.ok{background:var(--take-soft);color:var(--take)}.hstat.diff{background:var(--opt-soft);color:var(--opt)}
+.hosp{background:var(--info-soft);border-radius:8px;padding:10px 12px 6px}
+.hosp .alert{background:var(--panel)}
+nav.tabs{display:flex;gap:4px;margin:14px 0 0;border-bottom:1px solid var(--line)}
+nav.tabs button{font:inherit;font-size:14.5px;font-weight:700;cursor:pointer;background:none;border:0;border-bottom:3px solid transparent;color:var(--ink2);padding:8px 14px;margin-bottom:-1px}
+nav.tabs button[aria-selected=true]{color:var(--accent);border-bottom-color:var(--accent)}
+nav.tabs button .cnt{font-family:var(--mono);font-size:11px;font-weight:500;margin-left:4px}
+.appx-intro{margin:16px 0 0;font-size:13.5px;color:var(--ink2)}
+.appx-toc{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.appx-toc a{font-size:13px;color:var(--accent);text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:3px 10px;background:var(--panel)}
+
+/* risk group boxes */
+table.rt tr.rrow td:first-child{border-left:6px solid var(--rg)}
+table.rt tr.rrow{background:var(--rgs)}
+.risk-group{margin-top:10px;border:2px solid var(--rg);border-radius:8px;background:var(--rgs);overflow:hidden}
+.risk-group .risk-head{margin:0;padding:6px 10px;background:var(--rg);color:#fff;font-size:13.5px;letter-spacing:.06em}
+.risk-group .risk-head .rd{font-weight:500;opacity:.9;margin-left:auto;font-size:12px;letter-spacing:0}
+.risk-group .risk-head .dot{background:#fff}
+.risk-group .surglist{padding:8px}
+.risk-group .sbtn{border-left:4px solid var(--rg)}
+.risk-group .sbtn[aria-pressed=true]{background:var(--rg);border-color:var(--rg);color:#fff}
+.rg-H{--rg:var(--hold);--rgs:var(--hold-soft)}
+.rg-L{--rg:var(--opt);--rgs:var(--opt-soft)}
+.rg-M{--rg:var(--take);--rgs:var(--take-soft)}
+:root[data-theme="dark"] .risk-group .risk-head,:root[data-theme="dark"] .risk-group .sbtn[aria-pressed=true]{color:#10110f}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .risk-group .risk-head,:root:not([data-theme="light"]) .risk-group .sbtn[aria-pressed=true]{color:#10110f}}
+:root[data-theme="dark"] .risk-group .risk-head .dot{background:#10110f}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .risk-group .risk-head .dot{background:#10110f}}
+/* prominent tabs */
+nav.tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 4px;border-bottom:0}
+nav.tabs button{border:2px solid var(--accent);border-radius:10px;padding:12px 14px;background:var(--panel);color:var(--accent);font-size:16px;font-weight:900;margin:0;text-align:center;line-height:1.3}
+nav.tabs button .cnt{display:block;font-family:var(--sans);font-size:12px;font-weight:500;margin:2px 0 0;opacity:.85}
+nav.tabs button[aria-selected=true]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);box-shadow:0 3px 0 var(--ink)}
+nav.tabs button:hover{background:var(--accent-soft)}
+nav.tabs button[aria-selected=true]:hover{background:var(--accent)}
+@media (prefers-reduced-motion:no-preference){.result .panel{transition:box-shadow .2s}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <h1>圍術期停藥查詢<small>Perioperative antithrombotic interruption &amp; resumption</small></h1>
+  <div class="srcchips"><span class="chip">CHEST 2022</span><span class="chip">AHA/ACC 2024</span><span class="chip" style="background:var(--info-soft);color:var(--info)">員基院內準則 2026.04</span><span class="chip">PubMed 實證</span></div>
+</header>
+<div class="disclaimer"><b>僅供臨床人員查核參考：</b>主建議整理自 CHEST 2022（Douketis et al.，含 2023 勘誤）與 2024 AHA/ACC 非心臟手術圍術期指引，並逐項對照員林基督教醫院「手術/侵入性處置風險藥品停藥及恢復時機」（2026.04）；指引未涵蓋之品項（cilostazol、dipyridamole、ticlopidine、sulfonylurea、中藥、保健品）以院內準則為主。抗栓部分適用於<b>擇期</b>手術、長期（≥3 個月）使用抗栓藥物之成人。緊急手術、低劑量 DOAC（如 rivaroxaban 2.5 mg BID）、預防劑量抗凝不在範圍內。實際處置請依指引原文、麻醉科／外科／心臟科共同決策與病人個別情況。</div>
+
+<nav class="tabs" role="tablist">
+  <button type="button" role="tab" id="t-tool" aria-selected="true" aria-controls="tab-tool">停藥查詢<span class="cnt">選手術、選藥物、看停藥時間</span></button>
+  <button type="button" role="tab" id="t-appx" aria-selected="false" aria-controls="tab-appx">附錄<span class="cnt">表 1・表 2・文獻</span></button>
+</nav>
+<div id="tab-tool" role="tabpanel" aria-labelledby="t-tool">
+<div class="grid">
+<!-- ============ controls ============ -->
+<div class="panel" id="controls">
+  <div class="step">
+    <h2><span class="n">1</span>選擇手術 / 處置</h2>
+    <input type="search" id="q" placeholder="搜尋：如 膽囊、白內障、拔牙、TURP…" aria-label="搜尋手術">
+    <div id="surgs"></div>
+  </div>
+
+  <div class="step">
+    <h2><span class="n">2</span>選擇藥物<span class="hint" style="font-weight:400">可複選</span><button type="button" id="clearDrugs" class="linkbtn">清除</button></h2>
+    <div class="drugtabs" id="drugs"></div>
+  </div>
+
+  <div class="step" id="ptStep">
+    <h2><span class="n">3</span>病人因子</h2>
+    <div id="pt-crcl" class="field">
+      <label for="crcl">CrCl（mL/min，Cockcroft-Gault）</label>
+      <input type="number" id="crcl" min="0" max="200" step="1" value="" placeholder="未填">
+      <details class="mini"><summary>用 Cockcroft-Gault 計算</summary>
+        <div class="cg">
+          <input type="number" id="cgAge" placeholder="年齡" aria-label="年齡">
+          <input type="number" id="cgWt" placeholder="體重 kg" aria-label="體重">
+          <input type="number" id="cgScr" placeholder="Scr mg/dL" step="0.01" aria-label="血清肌酸酐">
+          <select id="cgSex" aria-label="性別"><option value="m">男</option><option value="f">女</option></select>
+        </div>
+        <div class="hint" id="cgOut">輸入後自動帶入上方 CrCl。</div>
+      </details>
+    </div>
+
+    <div id="pt-vka">
+      <div class="field">
+        <span class="flabel">抗凝適應症</span>
+        <div class="seg" id="indSeg">
+          <button type="button" data-v="af" aria-pressed="false">心房顫動</button>
+          <button type="button" data-v="mhv" aria-pressed="false">機械瓣膜</button>
+          <button type="button" data-v="vte" aria-pressed="false">VTE</button>
+        </div>
+      </div>
+      <div class="field">
+        <span class="flabel">血栓栓塞風險（分級見 <a href="#tbl-throm" data-goto="tbl-throm" style="color:var(--accent)">附錄表 1</a>）</span>
+        <div class="seg" id="trSeg">
+          <button type="button" data-v="low" aria-pressed="false">低</button>
+          <button type="button" data-v="mod" aria-pressed="false">中</button>
+          <button type="button" data-v="high" aria-pressed="false">高</button>
+        </div>
+        <details class="mini"><summary>怎麼分級？</summary><div id="trHelp" class="hint" style="margin-top:6px"></div></details>
+      </div>
+    </div>
+
+    <div id="pt-pci-oac"><label class="check"><input type="checkbox" id="oacPci"> <span>曾放支架 / PCI，目前只吃抗凝劑（沒有抗血小板藥）<span class="hint" style="display:block">勾選後會提醒：停抗凝劑期間改用 aspirin 保護支架，術後恢復抗凝劑再停 aspirin（AHA 2024，COR 1）。不影響抗凝劑停藥天數。</span></span></label></div>
+
+    <div id="pt-ap">
+      <div class="field">
+        <span class="flabel">抗血小板適應症 / 支架</span>
+        <select id="stent">
+          <option value="" selected>— 未填 —</option>
+          <option value="primary">初級預防（無心血管疾病）</option>
+          <option value="noPCI">CAD 或其他動脈疾病，無 PCI</option>
+          <option value="balloon">僅氣球擴張（無支架）</option>
+          <option value="bms">裸金屬支架 BMS</option>
+          <option value="desacs">藥物塗層支架 DES（因 ACS 置放）</option>
+          <option value="desccd">藥物塗層支架 DES（因慢性冠心病置放）</option>
+        </select>
+      </div>
+      <div class="row2" id="pciTimeRow">
+        <div class="field"><label for="pciMo">距 PCI（月）</label><input type="number" id="pciMo" min="0" step="0.5" value="" placeholder="未填"></div>
+        <div class="field"><span class="flabel">目前 DAPT？</span>
+          <div class="seg" id="daptSeg"><button type="button" data-v="1" aria-pressed="false">是</button><button type="button" data-v="0" aria-pressed="false">否</button></div>
+        </div>
+      </div>
+      <label class="check"><input type="checkbox" id="timeSens"> 手術具時效性（如惡性腫瘤切除），無法延後</label>
+    </div>
+  </div>
+</div>
+
+<!-- ============ result ============ -->
+<div class="result">
+  <div class="panel" id="out" aria-live="polite"></div>
+</div>
+</div>
+
+<section class="ref-sec" id="tbl-pk">
+  <h2>表 3　藥動學、監測與反轉</h2>
+  <p class="hint">AHA 2024 Table 12（抗血小板）與 Table 15（口服抗凝劑）。</p>
+  <div class="tbwrap"><table class="rt">
+    <thead><tr><th>藥物</th><th>機轉</th><th>t½</th><th>Tmax</th><th>腎排除</th><th>主要交互作用</th><th>監測</th><th>反轉</th></tr></thead>
+    <tbody>
+      <tr><td>Warfarin</td><td>VKORC1（維生素 K 依賴因子）</td><td class="num">36–48 h</td><td class="num">2–6 h</td><td class="num">0%</td><td>CYP2C9 等多重</td><td>PT/INR</td><td>Vitamin K、4F-PCC、FFP</td></tr>
+      <tr><td>Apixaban</td><td>Xa 抑制劑</td><td class="num">9–14 h</td><td class="num">3–4 h</td><td class="num">27%</td><td>CYP3A4、P-gp</td><td>Anti-Xa（藥物校正）</td><td>4F-PCC、andexanet alfa</td></tr>
+      <tr><td>Rivaroxaban</td><td>Xa 抑制劑</td><td class="num">6–9 h（老人 11–13 h）</td><td class="num">2–4 h</td><td class="num">33%</td><td>CYP3A4/2J2、P-gp</td><td>Anti-Xa（藥物校正）</td><td>4F-PCC、andexanet alfa</td></tr>
+      <tr><td>Edoxaban</td><td>Xa 抑制劑</td><td class="num">10–14 h</td><td class="num">1–2 h</td><td class="num">37–59%</td><td>P-gp（CYP3A4 &lt;5%）</td><td>Anti-Xa（藥物校正）</td><td>4F-PCC、andexanet alfa</td></tr>
+      <tr><td>Dabigatran</td><td>IIa（直接凝血酶）抑制劑</td><td class="num">12–15 h</td><td class="num">1.25–3 h</td><td class="num">85%（可部分透析）</td><td>P-gp</td><td>dTT、ECT</td><td>Idarucizumab、4F-PCC</td></tr>
+      <tr><td>LMWH（enoxaparin）</td><td>主要抗 Xa</td><td class="num">3–5 h</td><td class="num">3–4 h</td><td class="num">主要經腎</td><td>—</td><td>Anti-Xa（不建議常規）</td><td>Protamine（部分）</td></tr>
+      <tr><td>UFH（IV）</td><td>抗 IIa/Xa</td><td class="num">~90 min（30–120）</td><td class="num">立即</td><td class="num">—</td><td>—</td><td>aPTT / anti-Xa</td><td>Protamine</td></tr>
+    </tbody></table></div>
+  <div class="tbwrap" style="margin-top:10px"><table class="rt">
+    <thead><tr><th>抗血小板藥物</th><th>停藥後血小板功能恢復最短時間（AHA 2024 Table 12）</th><th>CHEST 2022 建議術前停藥</th><th>術後恢復達最大效果</th></tr></thead>
+    <tbody>
+      <tr><td>Aspirin</td><td class="num">4 d</td><td>非心臟手術：繼續；若需停：≤7 天（Rec 29a/29b）</td><td>數分鐘內</td></tr>
+      <tr><td>Clopidogrel</td><td class="num">5–7 d</td><td>5 天（Rec 30）</td><td>維持劑量 4–5 天；負荷劑量 2–6 h</td></tr>
+      <tr><td>Ticagrelor</td><td class="num">3–5 d</td><td>3–5 天（Rec 31）</td><td>約 2 h</td></tr>
+      <tr><td>Prasugrel</td><td class="num">7–10 d</td><td>7 天（Rec 32）</td><td>約 3 天（維持劑量）</td></tr>
+    </tbody></table></div>
+</section>
+</div>
+
+<div id="tab-appx" role="tabpanel" aria-labelledby="t-appx" hidden>
+<p class="appx-intro">查詢時需要判斷分級或回頭查證出處時使用。</p>
+<div class="appx-toc"><a href="#tbl-throm">表 1　血栓栓塞風險</a><a href="#tbl-bleed">表 2　出血風險</a><a href="#papers">實證文獻</a></div>
+<section class="ref-sec" id="tbl-throm">
+  <h2>表 1　圍術期血栓栓塞風險分級</h2>
+  <p class="hint">CHEST 2022 Table 1（2023 勘誤版）＝ AHA 2024 Table 14。為經驗性分級，需結合病人與手術因素判斷；心臟手術（CABG、頸動脈內膜切除）本身即提高風險。</p>
+  <div class="tbwrap"><table class="rt">
+    <thead><tr><th>風險</th><th>機械瓣膜</th><th>心房顫動</th><th>VTE</th></tr></thead>
+    <tbody>
+    <tr><td><span class="badge H">高</span><br><span class="hint">ATE &gt;10%/年 或 VTE &gt;10%/月</span></td><td>二尖瓣瓣膜合併中風危險因子*<br>籠球瓣或傾斜碟瓣（二尖瓣/主動脈瓣位置）<br>近期（&lt;3 個月）中風或 TIA</td><td>CHA₂DS₂-VASc ≥7 或 CHADS₂ 5–6<br>近期（&lt;3 個月）中風或 TIA<br>風濕性瓣膜疾病</td><td>近期（&lt;3 個月，尤其 &lt;1 個月）VTE<br>嚴重血栓傾向（protein C/S、antithrombin 缺乏；FVL 或 prothrombin G20210A 同型合子或雙重異型合子；多重血栓傾向）<br>抗磷脂抗體<br>高 VTE 風險之活動性癌症†</td></tr>
+    <tr><td><span class="badge L">中</span><br><span class="hint">4–10%/年 或 4–10%/月</span></td><td>二尖瓣瓣膜無中風危險因子<br>雙葉型主動脈瓣（AVR）合併中風危險因子*</td><td>CHA₂DS₂-VASc 5–6 或 CHADS₂ 3–4</td><td>過去 3–12 個月內 VTE<br>復發性 VTE<br>非嚴重血栓傾向（FVL 或 G20210A 異型合子）<br>活動性癌症或近期癌症病史</td></tr>
+    <tr><td><span class="badge M">低</span><br><span class="hint">ATE &lt;4%/年 或 VTE &lt;2%/月</span></td><td>雙葉型 AVR 無中風危險因子</td><td>CHA₂DS₂-VASc 1–4 或 CHADS₂ 0–2（且無中風/TIA 病史）</td><td>VTE &gt;12 個月前</td></tr>
+    </tbody></table></div>
+  <p class="hint">*中風危險因子：AF、中斷抗凝期間或其他之中風/TIA 病史、瓣膜血栓史、風濕性心臟病、高血壓、糖尿病、心衰竭、年齡 ≥75 歲。†胰臟癌、骨髓增生性疾病、原發性腦癌、胃癌、食道癌。</p>
+</section>
+
+<section class="ref-sec" id="tbl-bleed">
+  <h2>表 2　手術 / 處置出血風險分級</h2>
+  <p class="hint">CHEST 2022 Table 2（依 ISTH 指引聲明）；AHA 2024 Table 13 補充範例。</p>
+  <div class="tbwrap"><table class="rt">
+    <thead><tr><th style="width:24%">出血風險</th><th>手術 / 處置</th></tr></thead>
+    <tbody id="bleedBody"></tbody></table></div>
+</section>
+
+
+<section class="ref-sec" id="papers">
+  <h2>實證文獻（PubMed 檢索）</h2>
+  <p class="hint">以下文獻皆經 PubMed 查證書目資料與 DOI；關鍵數據摘自 PubMed 摘要。前兩篇為本工具之主要依據（使用者提供）。</p>
+  <div class="cards" id="paperCards"></div>
+</section>
+
+</div>
+
+<footer>資料來源：Douketis JD, et al. CHEST 2022;162(5):e207–e243（含 CHEST 2023;164(1):267 勘誤）；Thompson A, et al. Circulation 2024;150:e351–e442；員林基督教醫院 手術/侵入性處置風險藥品停藥及恢復時機（2026.04）。其他文獻經 PubMed 檢索。版本日期 2026-09-23。</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+const RISK={H:"高出血風險",L:"低–中出血風險",M:"極低出血風險"};
+const RISKD={H:"30 天大出血 ≥2%",L:"30 天大出血 0–2%",M:"30 天大出血 ≈0%"};
+/* flags: dental derm ophtho device polyp neuraxial crit(intracranial/spine) cabg cardiac cag */
+const SURG=[
+ {id:"ca",r:"H",n:"癌症腫瘤切除（肺、食道、胃、大腸、肝膽、胰臟）"},
+ {id:"ortho",r:"H",n:"大型骨科手術（髖 / 膝 / 肩關節置換）",note:"<b>大型骨科手術包含：</b>全髖關節置換（THA）、全膝關節置換（TKA）、肩關節置換。CHEST 2022 Table 2 明列「大型骨科手術，含肩關節置換」；髖、膝關節置換於 CHEST 2022 內文列為高 VTE 風險手術，J Arthroplasty 2026（Di Pauli von Treuheim et al.）Table 1 亦將全關節置換歸為高出血風險。<br>不屬於此類：關節鏡、手 / 足手術（低–中出血風險）；脊椎手術另列高風險。髖部骨折手術出血風險亦高，但多屬緊急 / 半緊急手術，不適用擇期停藥流程。關節置換常合併脊髓麻醉，另需符合椎管內麻醉停藥間隔。"},
+ {id:"plastic",r:"H",n:"重建整形手術"},
+ {id:"thor",r:"H",n:"大型胸腔手術"},
+ {id:"urogi",r:"H",n:"泌尿或腸胃道手術（尤其吻合手術）"},
+ {id:"turp",r:"H",n:"TURP、膀胱切除、腫瘤燒灼"},
+ {id:"neph",r:"H",n:"腎臟切除、腎臟切片"},
+ {id:"polyp",r:"H",n:"大腸息肉切除（polypectomy）",f:["polyp"]},
+ {id:"bowel",r:"H",n:"腸道切除"},
+ {id:"peg",r:"H",n:"PEG 胃造廔、ERCP"},
+ {id:"vasc",r:"H",n:"高度血管化器官手術（腎、肝、脾）"},
+ {id:"cabg",r:"H",n:"冠狀動脈繞道手術 CABG",f:["cabg","cardiac"]},
+ {id:"cardiac",r:"H",n:"其他心臟手術",f:["cardiac"]},
+ {id:"icran",r:"H",n:"顱內手術",f:["crit"]},
+ {id:"spine",r:"H",n:"脊椎手術",f:["crit"]},
+ {id:"long",r:"H",n:"任何大手術（時間 >45 分鐘）"},
+ {id:"neur",r:"H",n:"椎管內麻醉（脊髓 / 硬膜外）",f:["neuraxial"]},
+ {id:"epi",r:"H",n:"硬膜外注射（疼痛介入）",f:["neuraxial"]},
+ {id:"arth",r:"L",n:"關節鏡手術"},
+ {id:"bx",r:"L",n:"皮膚 / 淋巴結切片"},
+ {id:"hf",r:"L",n:"手 / 足手術"},
+ {id:"cag",r:"L",n:"冠狀動脈攝影",f:["cag"]},
+ {id:"egd",r:"L",n:"上消化道內視鏡 ± 切片"},
+ {id:"colo",r:"L",n:"大腸鏡 ± 切片（無息肉切除）"},
+ {id:"hyst",r:"L",n:"腹式子宮切除"},
+ {id:"lapc",r:"L",n:"腹腔鏡膽囊切除"},
+ {id:"hern",r:"L",n:"腹壁疝氣修補",f:["hernia"]},
+ {id:"hemo",r:"L",n:"痔瘡手術"},
+ {id:"bron",r:"L",n:"支氣管鏡 ± 切片"},
+ {id:"cdent",r:"L",n:"複雜牙科處置",src:"AHA"},
+ {id:"breast",r:"L",n:"乳房手術",src:"AHA"},
+ {id:"bore",r:"L",n:"使用大口徑針之處置",src:"AHA"},
+ {id:"derm",r:"M",n:"小型皮膚科手術（BCC/SCC 切除、光化性角化、痣）",f:["derm"]},
+ {id:"cat",r:"M",n:"白內障手術（phaco）",f:["ophtho"]},
+ {id:"eye",r:"M",n:"小型眼科（虹膜切開、視網膜雷射）",f:["ophtho"]},
+ {id:"dent",r:"M",n:"小型牙科（拔牙、補牙、根管、贗復、洗牙）",f:["dental"]},
+ {id:"cied",r:"M",n:"心律調節器 / ICD 植入",f:["device"]}
+];
+const DRUGS=[
+ {g:"維生素 K 拮抗劑",items:[{id:"warfarin",n:"Warfarin",s:"VKA"}]},
+ {g:"直接口服抗凝劑 DOAC",items:[{id:"apixaban",n:"Apixaban",s:"Eliquis"},{id:"rivaroxaban",n:"Rivaroxaban",s:"Xarelto"},{id:"edoxaban",n:"Edoxaban",s:"Lixiana"},{id:"dabigatran",n:"Dabigatran",s:"Pradaxa"}]},
+ {g:"注射型抗凝劑（治療劑量）",items:[{id:"lmwh",n:"LMWH",s:"enoxaparin 等"},{id:"ufh",n:"UFH 靜脈輸注",s:"heparin"}]},
+ {g:"抗血小板",items:[{id:"aspirin",n:"Aspirin",s:""},{id:"clopidogrel",n:"Clopidogrel",s:"Plavix"},{id:"ticagrelor",n:"Ticagrelor",s:"Brilinta"},{id:"prasugrel",n:"Prasugrel",s:"Efient"},{id:"cilostazol",n:"Cilostazol",s:"Pletaal"},{id:"dipyridamole",n:"Dipyridamole",s:"Persantin"},{id:"ticlopidine",n:"Ticlopidine",s:""}]},
+ {g:"降血糖藥",items:[{id:"sglt2",n:"SGLT2i",s:"ertugliflozin 除外"},{id:"ertu",n:"Ertugliflozin",s:"SGLT2i"},{id:"su",n:"Sulfonylurea",s:""},{id:"metformin",n:"Metformin",s:"含複方"}]},
+ {g:"GLP-1 / GIP 受體促效劑",items:[{id:"glpqd",n:"每日注射型",s:"liraglutide 等"},{id:"glpqw",n:"每週注射型",s:"semaglutide、tirzepatide 等"},{id:"semapo",n:"口服 semaglutide",s:"Rybelsus"}]},
+ {g:"中藥 / 保健品",items:[{id:"tcm",n:"活血中藥",s:"三七、丹參等"},{id:"supp",n:"保健品",s:"銀杏、魚油等"}]}
+];
+const DNAME={};DRUGS.forEach(g=>g.items.forEach(i=>DNAME[i.id]=i.n));
+const XA=["apixaban","rivaroxaban","edoxaban"], P2Y=["clopidogrel","ticagrelor","prasugrel"], AP=["aspirin"].concat(P2Y);
+const OTHERAP=["cilostazol","dipyridamole","ticlopidine"], NONAT=["sglt2","ertu","su","metformin","glpqd","glpqw","semapo","tcm","supp"];
+
+let OV={};
+const getCrcl=()=>OV.crcl!==undefined?OV.crcl:parseFloat($("crcl").value);
+const getTr=()=>OV.tr!==undefined?OV.tr:S.tr;
+const getStent=()=>OV.stent!==undefined?OV.stent:$("stent").value;
+const S={surg:"lapc",drug:"apixaban",drugs:new Set(["apixaban"]),ind:null,tr:null,dapt:null,q:""};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const R=(t,ev)=>`<span class="ref">${t}</span>`+(ev?`<span class="ev">${ev}</span>`:"");
+
+/* ---------- render controls ---------- */
+function renderSurg(){
+  const q=S.q.trim().toLowerCase();
+  let h="";
+  ["H","L","M"].forEach(r=>{
+    const list=SURG.filter(s=>s.r===r&&(!q||s.n.toLowerCase().includes(q)));
+    if(!list.length)return;
+    h+=`<div class="risk-group rg-${r}"><div class="risk-head"><span class="dot ${r}"></span>${RISK[r]}<span class="rd">${RISKD[r]}</span></div><div class="surglist">`;
+    list.forEach(s=>{h+=`<button type="button" class="sbtn" data-id="${s.id}" aria-pressed="${s.id===S.surg}">${esc(s.n)}${s.src?`<span class="tag">${s.src}</span>`:""}</button>`});
+    h+="</div></div>";
+  });
+  $("surgs").innerHTML=h||`<p class="hint">找不到符合的手術，請改用其他關鍵字，或依出血風險選擇相近類別。</p>`;
+}
+function renderDrugs(){
+  $("drugs").innerHTML=DRUGS.map(g=>`<div class="dgroup"><span class="glabel">${g.g}</span>`+g.items.map(i=>`<button type="button" class="dbtn" data-id="${i.id}" aria-pressed="${S.drugs.has(i.id)}">${i.n}${i.s?` <small>${i.s}</small>`:""}</button>`).join("")+`</div>`).join("");
+}
+function segBind(id,key){
+  $(id).addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;S[key]=b.dataset.v;[...$(id).children].forEach(x=>x.setAttribute("aria-pressed",x===b));update();});
+}
+
+/* ---------- plan engine ---------- */
+function blank(){return{drug:{},lmwh:null,labels:{},notes:[],alerts:[],kpi:[],hourly:null,refs:[]}}
+function fill(o,from,to,st){for(let d=from;d<=to;d++)o[d]=st}
+
+function plan(){
+  const s=SURG.find(x=>x.id===S.surg), f=s.f||[], r=s.r, d=S.drug, P=blank();
+  const crcl=getCrcl(); const hasC=!isNaN(crcl);
+  const has=k=>f.includes(k);
+
+  /* ======== Warfarin ======== */
+  if(d==="warfarin"){
+    if(r==="M"){
+      fill(P.drug,-10,5,"take");
+      P.kpi=[["術前停藥","不停藥","take","繼續 warfarin"],["術後恢復","—","take","持續服用"],["肝素橋接","不需要","take",""]];
+      if(has("device")){P.alerts.push(["green","繼續 warfarin，不要停藥橋接",`BRUISE CONTROL：繼續 warfarin 的臨床顯著囊袋血腫 3.5% vs 橋接 16.0%（RR 0.19）。${R("CHEST Rec 14","強建議，中等確定性")}`]);P.notes.push(`前提為處置當時 INR &lt;3.0。${R("CHEST Rec 14 考量")}`);}
+      if(has("dental")){P.alerts.push(["green","繼續 warfarin，併用止血輔助",`${R("CHEST Rec 10","條件式，低確定性")}${R("CHEST Rec 11")}`]);P.notes.push("Tranexamic acid（5%）漱口液 10 mL：處置前一次，術後每日 2–3 次，持續 1–2 天；可加強縫合、TXA 浸潤紗布。");P.notes.push("多顆拔牙、牙齦狀況差、預期出血量大時，可考慮部分中斷（術前 2–3 天）。");}
+      if(has("derm")){P.alerts.push(["green","繼續 warfarin",R("CHEST Rec 12","條件式，極低確定性")]);P.notes.push("較大（&gt;3 cm）皮膚癌切除、需植皮或預期傷口癒合久者，可考慮中斷。");}
+      if(has("ophtho")){P.alerts.push(["green","繼續 warfarin",R("CHEST Rec 13","條件式，極低確定性")]);P.notes.push("白內障多採表面麻醉；若採球後（retrobulbar）麻醉或複雜視網膜手術，出血風險較高，可考慮中斷。");P.notes.push("統合分析：繼續 VKA 出血 OR 3.26，但多為自限性點狀前房出血或結膜下出血，未影響視力。");}
+      P.notes.push(`AHA 2024 Table 13：極低出血風險處置原則上不中斷 VKA。${R("AHA T13")}`);
+      return P;
+    }
+    fill(P.drug,-10,-6,"take");fill(P.drug,-5,-1,"hold");P.drug[0]="take";P.labels[0]="當晚";fill(P.drug,1,5,"take");
+    P.kpi=[["術前停藥","5 天","hold","最後一劑 Day −6"],["術後恢復","24 h 內","take","手術當晚或隔天，原劑量"],["肝素橋接",getTr()==="high"?"建議":"不建議",getTr()==="high"?"bridge":"take",getTr()==="high"?"治療劑量 LMWH":""]];
+    P.notes.push(`術前停 warfarin ≥5 天（Day −5 至 −1 不服）。${R("CHEST Rec 1","條件式，低確定性")}${R("AHA T13")}`);
+    P.notes.push(`術後 24 小時內恢復（多數為手術當晚），以<b>原維持劑量</b>、不需加倍。${R("CHEST Rec 2")}${R("CHEST Rec 3")}`);
+    P.notes.push("恢復後約 2–3 天出現部分抗凝效果，4–8 天達完整效果（INR &gt;2.0）。止血不佳、需再處置或無法口服時延後。");
+    P.notes.push(`術前 1–2 天 INR &gt;1.5：不建議常規給維生素 K。${R("CHEST Rec 4","條件式，極低確定性")}`);
+    P.notes.push("老年多共病、低劑量需求、目標 INR 較高者可能需更長停藥；可於術前一天檢查 INR（術前 INR &gt;3.5、清除較慢時尤其）。");
+    if(getTr()==="high"&&!has("polyp")){
+      P.lmwh={};fill(P.lmwh,-10,-4,"none");fill(P.lmwh,-3,-2,"full");P.lmwh[-1]="half";P.lmwh[0]="none";
+      if(r==="H"){P.lmwh[1]="low";P.lmwh[2]="low";P.lmwh[3]="full";P.lmwh[4]="full";P.lmwh[5]="full";P.labels.l2="48–72h";}
+      else{fill(P.lmwh,1,5,"full");}
+      P.alerts.push(["amber","高血栓風險：建議 LMWH 橋接",`${R("CHEST Rec 8","條件式，極低確定性")}${R("AHA 2a")}　Day −3 起治療劑量 LMWH（如 enoxaparin 1 mg/kg BID 或 1.5 mg/kg QD），<b>最後一劑於 Day −1 早上、給全日劑量的一半</b>（約術前 24 h）。${R("CHEST Rec 18")}${R("CHEST Rec 20")}`]);
+      P.notes.push(`術後 LMWH 橋接：低–中出血風險 ≥24 h 後；高出血風險等 48–72 h，期間可先用預防劑量（enoxaparin 40 mg QD）。持續至 INR ≥2.0。${R("CHEST Rec 19")}`);
+      P.notes.push(`不建議常規監測 anti-Xa 指導 LMWH 橋接。${R("CHEST Rec 21")}　重度腎功能不全或透析者，可改用治療劑量 IV UFH（術前 ≥4 h 停）。`);
+      P.notes.push("PERIOP2（BMJ 2021）：AF/機械瓣膜病人<b>術後</b> dalteparin 橋接 vs placebo，90 天血栓 1.0% vs 1.2%、大出血 1.3% vs 2.0%，皆無顯著差異 → 術後橋接宜個別化。");
+    }else if(getTr()==="high"&&has("polyp")){
+      P.alerts.push(["amber","息肉切除：建議不橋接",`${R("CHEST Rec 15","條件式，極低確定性")}　即使血栓風險高，息肉切除後遲發性出血風險使橋接不利；請與腸胃科個別討論。`]);
+    }else{
+      const rec={af:["CHEST Rec 6","強建議，中等確定性"],mhv:["CHEST Rec 5","條件式，極低確定性"],vte:["CHEST Rec 7","條件式，極低確定性"]}[S.ind]||["CHEST Rec 5–7","依適應症（未填）"];
+      P.alerts.push(["green","不建議肝素橋接",`${R(rec[0],rec[1])}${R("CHEST Rec 9")}${R("AHA 3: Harm")}　BRIDGE trial（AF）：不橋接之動脈血栓 0.4% vs 0.3%（非劣性），大出血 1.3% vs 3.2%。`]);
+      if(S.ind==="vte")P.notes.push("VTE 病人不做治療劑量橋接，但術後 24 h 內可給預防劑量 LMWH，最多 5 天，直到 warfarin 恢復。");
+    }
+    if(has("polyp")&&getTr()!=="high")P.notes.push(`息肉切除：建議不橋接。${R("CHEST Rec 15")}`);
+    if(has("neuraxial"))P.notes.push("椎管內麻醉：需確認 INR 已正常化；導管留置與移除時機請依 ASRA 第五版（2025）與麻醉科規範。");
+    if($("oacPci").checked)P.alerts.push(["blue","曾放支架、目前只吃抗凝劑：停藥期間以 aspirin 取代",`停 OAC 期間，合理以 aspirin 取代，術後恢復 OAC 後再停 aspirin。${R("AHA 7.5 Rec 9","COR 1")}`]);
+    return P;
+  }
+
+  /* ======== DOAC ======== */
+  if(XA.includes(d)||d==="dabigatran"){
+    const isD=d==="dabigatran";
+    let pre=0, why="";
+    if(r==="M"){pre=0}
+    else if(has("neuraxial")){
+      if(isD) pre=(hasC&&crcl<50)?5:4; else pre=3;
+      why="neur";
+    } else if(isD){
+      pre=(hasC&&crcl<50)?(r==="H"?4:2):(r==="H"?2:1);
+    } else {
+      pre=(hasC&&crcl<30)?(r==="H"?3:2):(r==="H"?2:1);
+    }
+    if(pre===0){
+      fill(P.drug,-10,5,"take");P.drug[0]="opt";P.labels[0]="可略過";
+      P.kpi=[["術前停藥","不停藥","take","可考慮略過處置當天早上一劑"],["術後恢復","當天","take","止血後照常"],["肝素橋接","不需要","take",""]];
+      P.notes.push(`極低出血風險可在完整抗凝下進行；可考慮略過處置當天劑量，以避開血中濃度高峰。${R("CHEST T2 註 e")}${R("AHA T13")}`);
+      if(has("device"))P.notes.push("CIED 植入：隨機試驗（n=662）DOAC 持續 vs 中斷之囊袋血腫無差異（OR 1.02）。");
+      if(has("ophtho"))P.notes.push("白內障：小型觀察研究持續 DOAC 未見出血事件。球後麻醉或複雜視網膜手術可考慮依低–中風險停藥。");
+      if(has("dental"))P.notes.push("牙科：可併用 tranexamic acid 漱口液與局部止血；多顆拔牙可依低–中出血風險停 1 天。");
+    }else{
+      fill(P.drug,-10,-pre-1,"take");fill(P.drug,-pre,0,"hold");
+      if(r==="H"){P.drug[1]="hold";P.drug[2]="opt";fill(P.drug,3,5,"take");P.labels[2]="48–72h";}
+      else{fill(P.drug,1,5,"take");P.labels[1]="≥24h";}
+      P.kpi=[["術前停藥",`${pre} 天`,"hold",`最後一劑 Day −${pre+1}`+(pre===1?"（距手術約 30–36 h）":pre===2?"（約 60–68 h）":"")],["術後恢復",r==="H"?"48–72 h":"≈24 h","take",r==="H"?"Day +2 至 +3":"Day +1"],["肝素橋接","不需要","take",R("CHEST Rec 26")]];
+      const recN={apixaban:"22",dabigatran:"23",edoxaban:"24",rivaroxaban:"25"}[d];
+      if(why==="neur"){
+        P.alerts.push(["amber","椎管內麻醉：需「最低殘餘藥效」",`AHA 2024：高出血風險處置（如椎管內麻醉）應完全中斷 OAC；若需最小藥效，停藥 ≥5 個半衰期——Xa 抑制劑 ≥3 天，dabigatran ≥4 天（CrCl &lt;50 為 5–6 天）。${R("AHA 7.6")}　導管與術後劑量時機另請依 ASRA 第五版（2025）確認。`]);
+      }
+      P.notes.push(`${DNAME[d]}：術前停 ${pre} 天，手術當天不服用。${R("CHEST Rec "+recN,"條件式，極低確定性")}${R("AHA T13")}`);
+      if(isD)P.notes.push(`Dabigatran 約 80% 經腎排除：CrCl ≥50 → 低–中 1 天 / 高 2 天；CrCl &lt;50 → 低–中 2 天 / 高 4 天。${hasC?(OV.crcl!==undefined?"":`（目前 CrCl ${crcl}）`):""}`);
+      else P.notes.push(`CrCl &lt;30 mL/min（AHA Table 13）：低–中 2 天 / 高 3 天。PAUSE 研究排除 CrCl &lt;25（apixaban）或 &lt;30（rivaroxaban）。${hasC?(OV.crcl!==undefined?"":`（目前 CrCl ${crcl}）`):""}`);
+      if(isD&&hasC&&crcl<30)P.alerts.push(["red","CrCl <30：超出指引實證範圍","PAUSE 排除 dabigatran CrCl &lt;30 病人；需更長停藥，建議與血液科/腎臟科討論，必要時量測 dTT/ECT。"]);
+      P.notes.push(`術後恢復：低–中出血風險約 24 h 後；高出血風險 48–72 h 後。DOAC 服藥後 1–3 h 即達峰值，需確認止血。${R("CHEST Rec 27")}${R("AHA 2a")}`);
+      P.notes.push(`不建議橋接：DOAC 起效與消退快。LMWH 橋接使大出血增加約 3 倍（4.8% vs 1.6%），血栓無差異。${R("CHEST Rec 26")}`);
+      if(r==="H")P.notes.push("高 VTE 風險（如骨盆腹腔癌症手術、髖/膝關節置換）：恢復全劑量前的 48–72 h 可給預防劑量 LMWH（enoxaparin 40 mg QD）。");
+      P.notes.push(`不建議常規檢驗 DOAC 濃度來指導擇期手術。${R("CHEST Rec 28")}　PAUSE：依此流程，術前 DOAC &lt;50 ng/mL 比例 apixaban 90.5%、dabigatran 95.1%、rivaroxaban 96.8%。`);
+      P.notes.push("同時使用強效 CYP3A4 / P-gp 抑制劑、肝功能不全者，可能需延長停藥。");
+      if(has("polyp"))P.notes.push("息肉切除後出血可遲發（約 1–2 週），術後恢復時機請與腸胃科確認。");
+    }
+    if($("oacPci").checked)P.alerts.push(["blue","曾放支架、目前只吃抗凝劑：停藥期間以 aspirin 取代",`停 OAC 期間，合理以 aspirin 取代，術後恢復 OAC 後再停 aspirin。${R("AHA 7.5 Rec 9","COR 1")}`]);
+    return P;
+  }
+
+  /* ======== LMWH therapeutic ======== */
+  if(d==="lmwh"){
+    fill(P.drug,-10,-2,"full");P.drug[-1]="half";P.drug[0]="none";
+    if(r==="H"){P.drug[1]="low";P.drug[2]="low";fill(P.drug,3,5,"full");P.labels[2]="48–72h";}
+    else{fill(P.drug,1,5,"full");P.labels[1]="≥24h";}
+    P.isLmwhRow=true;
+    P.kpi=[["術前最後一劑","Day −1 早上","bridge","約術前 24 h，全日劑量一半"],["術後恢復",r==="H"?"48–72 h":"≥24 h","take",r==="H"?"期間可先給預防劑量":"治療劑量"],["Anti-Xa 監測","不常規","take",R("CHEST Rec 21")]];
+    P.notes.push(`最後一劑於術前約 24 h（非 12 h）：&gt;90% 病人在術前 12 h 給藥時仍有可測得抗凝效果，34% 達治療濃度。${R("CHEST Rec 18","條件式，極低確定性")}`);
+    P.notes.push(`Day −1 給全日劑量的一半：BID 者只給早上一劑；QD 者給約 50% 劑量。尤其適用高出血風險與椎管內麻醉。${R("CHEST Rec 20")}`);
+    P.notes.push(`術後：低–中出血風險 ≥24 h 後恢復；高出血風險等 48–72 h，其間可給預防劑量（enoxaparin 40 mg QD）。${R("CHEST Rec 19")}`);
+    P.notes.push("LMWH 半衰期 3–5 h、峰值 3–4 h；主要經腎排除，CrCl &lt;30 時殘餘效果延長，重度腎功能不全者可考慮改用 IV UFH。");
+    if(r==="M")P.alerts.push(["blue","極低出血風險","CHEST 未對極低出血風險處置之 LMWH 給出特定建議；上表依一般原則呈現，實務可視處置個別化。"]);
+    if(has("neuraxial"))P.alerts.push(["amber","椎管內麻醉","治療劑量 LMWH 與椎管內麻醉/導管移除之間隔，請依 ASRA 第五版（2025，「high dose」分類）確認。"]);
+    return P;
+  }
+
+  /* ======== UFH IV ======== */
+  if(d==="ufh"){
+    P.hourly=true;fill(P.drug,-10,-1,"full");P.drug[0]="hold";P.labels[0]="術前≥4h停";fill(P.drug,1,5,"full");P.labels[1]="≥24h";
+    P.kpi=[["術前停止輸注","≥4 h","hold","半衰期約 90 min（30–120）"],["術後恢復","≥24 h","take","不給 bolus"],["恢復強度","較低 aPTT 目標","take",""]];
+    P.notes.push(`治療劑量 IV UFH：術前 ≥4 h 停止。${R("CHEST Rec 16","條件式，極低確定性")}`);
+    P.notes.push(`術後 ≥24 h 恢復，避免 bolus，以較低強度輸注（較低 aPTT 目標）開始。${R("CHEST Rec 17")}`);
+    P.notes.push("適用：重度腎功能不全或透析病人之橋接替代方案。高出血風險手術可依止血情況延至 48–72 h。");
+    if(has("neuraxial"))P.alerts.push(["amber","椎管內麻醉","UFH 與椎管內穿刺/導管移除之間隔與 aPTT 確認，請依 ASRA 第五版（2025）。"]);
+    return P;
+  }
+
+  /* ======== Antiplatelet ======== */
+  if(AP.includes(d)){
+    const minor=has("dental")||has("derm")||has("ophtho");
+    const stent=getStent(), mo=parseFloat($("pciMo").value), ts=$("timeSens").checked, dapt=S.dapt==="1";
+    const isStent=["bms","desacs","desccd","balloon"].includes(stent);
+    // stent timing alerts
+    if(isStent&&!isNaN(mo)){
+      const dd=mo*30;
+      if(stent==="balloon"&&dd<14)P.alerts.push(["red","延後擇期手術","單純氣球擴張後應至少延後 14 天（DAPT 不中斷）。"+R("AHA 7.5 Rec 2","COR 1")]);
+      if(stent==="bms"&&dd<30)P.alerts.push(["red","BMS <30 天：不應施行擇期手術","需中斷抗血小板藥物之擇期手術可能有害（支架血栓、缺血風險高）。"+R("AHA 7.5 Rec 6","3: Harm")+(ts?"　若手術無法延後，圍術期應盡量維持 DAPT。"+R("AHA Rec 8","COR 1"):"")]);
+      if((stent==="desacs"||stent==="desccd")&&mo<=1)P.alerts.push(["red","DES ≤1 個月：不應施行擇期手術","需中斷抗血小板藥物之擇期手術可能有害。"+R("AHA 7.5 Rec 6","3: Harm")]);
+      if((stent==="desacs"||stent==="desccd")&&mo>1&&mo<3)P.alerts.push(["red","DES <3 個月：原則延後","有時效性手術亦建議至少 PCI 後 3 個月。"+R("AHA Rec 5","2b")+(ts?"　若必須手術，圍術期應盡量維持 DAPT。"+R("AHA Rec 8","COR 1")+"　CHEST（6–12 週）：可持續兩種或術前 7–10 天內停其中一種。"+R("CHEST Rec 37"):"")]);
+      if(stent==="desacs"&&mo>=3&&mo<12)P.alerts.push([ts?"amber":"red",ts?"DES（ACS）3–12 個月：時效性手術可考慮進行":"DES（ACS）<12 個月：建議延後",(ts?"PCI 後 ≥3 個月、延後手術風險大於 MACE 風險時可考慮。"+R("AHA Rec 5","2b"):"擇期手術理想上應延至 PCI 後 ≥12 個月。"+R("AHA Rec 3","COR 1"))+"　若進行：停 P2Y12、繼續 aspirin。"+R("CHEST Rec 38")]);
+      if(stent==="desccd"&&mo>=3&&mo<6)P.alerts.push([ts?"amber":"red",ts?"DES（CCD）3–6 個月：時效性手術可考慮進行":"DES（CCD）<6 個月：建議延後",(ts?R("AHA Rec 5","2b"):"擇期手術理想上延至 PCI 後 ≥6 個月。"+R("AHA Rec 4","2a"))+"　若進行：停 P2Y12、繼續 aspirin。"+R("CHEST Rec 38")]);
+      if((stent==="desacs"&&mo>=12)||(stent==="desccd"&&mo>=6)||(stent==="bms"&&dd>=30)||(stent==="balloon"&&dd>=14))P.alerts.push(["green","PCI 時間點可接受擇期手術","繼續 aspirin（75–100 mg），可行時減少心臟事件；P2Y12 依下表停藥。"+R("AHA Rec 7","COR 1")]);
+      if(dapt&&mo<6)P.notes.push(`不建議常規以 GP IIb/IIIa、cangrelor 或 LMWH 橋接；高風險者（如 &lt;3 個月、關鍵位置支架）可個別考慮。${R("CHEST Rec 39")}　AHA：DES &lt;6 個月或 BMS &lt;30 天、手術無法延後者，可考慮 IV 抗血小板橋接。${R("AHA Rec 10","2b")}`);
+      P.notes.push(`停藥決策應由外科、麻醉、心臟科與病人共同決定。${R("AHA Rec 1","COR 1")}`);
+    }
+    if(d==="aspirin"){
+      let stop=false;
+      if(minor){P.alerts.push(["green","繼續 aspirin",R(has("dental")?"CHEST Rec 41":has("derm")?"CHEST Rec 42":"CHEST Rec 43")]);}
+      else if(has("cabg")){P.alerts.push(["green","CABG：繼續 aspirin",R("CHEST Rec 34","條件式，低確定性")+"　ATACAS：術前 aspirin 未增加因出血再手術（1.8% vs 2.1%）。"]);}
+      else if(has("crit")){stop=true;P.alerts.push(["amber","顱內 / 脊椎手術：可考慮停 aspirin",`若決定中斷，停 ≤7 天（而非 7–10 天）。${R("CHEST Rec 29b","條件式，極低確定性")}　血小板功能恢復最短約 4 天（AHA T12）。${isStent?"<b>有冠狀動脈支架者停藥需與心臟科討論。</b>":""}`]);}
+      else if(stent==="primary"){P.alerts.push(["blue","初級預防用 aspirin",`多專科共識可能不需要即可中斷；POISE-2：術前起始或持續 aspirin 未降低死亡/非致死 MI（7.0% vs 7.1%），但大出血增加（4.6% vs 3.8%，HR 1.23）。${R("AHA 7.5")}`]);stop="opt";}
+      else{P.alerts.push(["green","非心臟手術：建議繼續 aspirin",R("CHEST Rec 29a","條件式，中等確定性")+(isStent?R("AHA Rec 7","COR 1"):R("AHA Rec 11","2b：無 PCI 之 CCD 選擇性繼續"))]);}
+      if(stop===true){fill(P.drug,-10,-8,"take");fill(P.drug,-7,-5,"opt");fill(P.drug,-4,0,"hold");P.drug[1]="take";fill(P.drug,2,5,"take");P.labels[1]="≤24h";
+        P.kpi=[["術前停藥","≤7 天","hold","至少約 4 天"],["術後恢復","≤24 h","take",R("CHEST Rec 33")],["橋接","不需要","take",""]];}
+      else if(stop==="opt"){fill(P.drug,-10,-8,"take");fill(P.drug,-7,-1,"opt");P.drug[0]="opt";fill(P.drug,1,5,"take");
+        P.kpi=[["術前停藥","可繼續或停 ≤7 天","opt","依出血風險"],["術後恢復","≤24 h（若仍有適應症）","take",""],["橋接","不需要","take",""]];}
+      else{fill(P.drug,-10,5,"take");P.kpi=[["術前停藥","不停藥","take","繼續 75–100 mg"],["術後恢復","—","take","持續"],["橋接","不需要","take",""]];}
+      if(stent==="noPCI")P.notes.push(`無 PCI 之 CAD 病人，<b>不建議術前才新開始</b> aspirin。${R("AHA Rec 12","3: No benefit")}`);
+      P.notes.push(`不建議常規以血小板功能檢測指導停藥。${R("CHEST Rec 36")}`);
+      return P;
+    }
+    // P2Y12
+    const cfg={clopidogrel:{n:5,rec:"30",opt:0,k:"5 天",sub:"最後一劑 Day −6"},ticagrelor:{n:3,opt:5,rec:"31",k:"3–5 天",sub:"最後一劑 Day −4 至 −6"},prasugrel:{n:7,rec:"32",opt:0,k:"7 天",sub:"最後一劑 Day −8（AHA：7–10 天）"}}[d];
+    if(minor){
+      fill(P.drug,-10,5,"take");
+      P.kpi=[["術前停藥",dapt&&isStent?"停 P2Y12":"不停藥",dapt&&isStent?"opt":"take",dapt&&isStent?"DAPT 者：繼續 aspirin、中斷 P2Y12":"單一抗血小板繼續"],["術後恢復","—","take",""],["橋接","不需要","take",""]];
+      P.alerts.push(["green","小型牙科 / 皮膚 / 眼科：繼續抗血小板藥物",R(has("dental")?"CHEST Rec 41":has("derm")?"CHEST Rec 42":"CHEST Rec 43")+"　接受 DAPT 者可繼續 aspirin、中斷 P2Y12（仍需考量支架時間點）。"]);
+      if(dapt&&isStent){fill(P.drug,-cfg.n,-1,"opt");P.drug[0]="opt";}
+      return P;
+    }
+    fill(P.drug,-10,-cfg.n-1,"take");
+    if(cfg.opt)fill(P.drug,-cfg.opt,-cfg.n-1,"opt");
+    fill(P.drug,-cfg.n,0,"hold");P.drug[1]="take";P.labels[1]="≤24h";fill(P.drug,2,5,"take");
+    P.kpi=[["術前停藥",cfg.k,"hold",cfg.sub],["術後恢復","≤24 h","take","維持劑量"],["Aspirin",stent==="primary"?"—":"繼續","take",stent==="primary"?"":"DAPT 者僅停 P2Y12"]];
+    P.notes.push(`${DNAME[d]}：術前停 ${cfg.k}。${R(has("cabg")?"CHEST Rec 34":"CHEST Rec "+cfg.rec,"條件式")}${R("AHA T12")}`);
+    P.notes.push(`術後 24 h 內以<b>維持劑量</b>恢復。${R(has("cabg")?"CHEST Rec 35":"CHEST Rec 33")}${has("cabg")?"　CABG 後若血小板 &lt;50,000/µL（常見於 on-pump）可延後。":""}`);
+    if(d==="clopidogrel")P.notes.push("以維持劑量（75 mg）恢復，最大效果需 4–5 天；給負荷劑量則 2–6 h 達效。");
+    if(d==="ticagrelor")P.notes.push("可逆性抑制，停 3 天可能足夠；高出血風險手術可延至 5 天（圖中斜紋）。");
+    if(has("cabg"))P.notes.push("CABG：PLATO 次分析中停 ticagrelor 24–72 h 與停 clopidogrel 7 天之出血率相近；clopidogrel 於 CABG 前 5 天內使用，出血與輸血需求增加。");
+    if(has("neuraxial"))P.alerts.push(["amber","椎管內麻醉","P2Y12 抑制劑與椎管內穿刺之停藥間隔，ASRA 規範可能較上列更保守，請依 ASRA 第五版（2025）確認。"]);
+    P.notes.push(`不建議常規以血小板功能檢測指導停藥。${R("CHEST Rec 36")}`);
+    return P;
+  }
+
+  /* ======== Other antiplatelets (hospital-only) ======== */
+  if(OTHERAP.includes(d)){
+    P.src="hosp";
+    const n=d==="ticlopidine"?10:2;
+    fill(P.drug,-n,0,"hold");
+    if(d==="ticlopidine"){fill(P.drug,1,3,"opt");fill(P.drug,4,5,"take");P.labels[1]="24–72h";}
+    else{P.drug[1]="take";P.labels[1]="24h";fill(P.drug,2,5,"take");}
+    P.kpi=[["術前停藥",`${n} 天`,"hold",`最後一劑 Day −${n+1}`],["術後恢復",d==="ticlopidine"?"24–72 h":"24 h","take","適當止血後"],["依據","本院準則","opt","CHEST / AHA 未涵蓋"]];
+    P.notes.push(`本院準則：${DNAME[d]} 術前停 ${n} 天（不分出血風險）；術後適當止血後 ${d==="ticlopidine"?"24–72":"24"} 小時內恢復。${R("本院 2026.04")}`);
+    if(d!=="ticlopidine")P.notes.push("CHEST 2022 明確表示不涵蓋 cilostazol、dipyridamole（可逆性血小板抑制，半衰期約 2–10 h）。");
+    else P.notes.push("Ticlopidine 為不可逆 P2Y12 抑制劑，CHEST / AHA 均未提供停藥天數；院內訂 10 天。");
+    if(has("dental")||has("derm")||has("ophtho"))P.notes.push(`本院表格未區分小型處置；CHEST Rec 41–43 對 aspirin / P2Y12 抑制劑於小型牙科、皮膚、眼科處置建議繼續，可與主治醫師討論是否需停。`);
+    P.notes.push("本院註記：實際停藥天數須依病人栓塞風險與出血風險個別調整。");
+    return P;
+  }
+
+  /* ======== SGLT2 inhibitors ======== */
+  if(d==="sglt2"||d==="ertu"){
+    const n=d==="ertu"?4:3;
+    fill(P.drug,-n,0,"hold");fill(P.drug,1,5,"opt");P.labels[1]="進食後";
+    P.kpi=[["術前停藥",`${n} 天`,"hold",`最後一劑 Day −${n+1}`],["術後恢復","恢復正常進食飲水","take","臨床穩定後"],["主要風險","正常血糖 DKA","hold",""]];
+    P.notes.push(`擇期非心臟手術術前停 SGLT2i 3–4 天，降低圍術期代謝性酸中毒風險。${R("AHA 7.8 Rec 2","COR 1, LOE C-LD")}`);
+    P.notes.push(`AHA 註：canagliflozin、dapagliflozin、empagliflozin ≥3 天；ertugliflozin ≥4 天。${d==="sglt2"?"本院對 bexagliflozin、ipragliflozin、luseogliflozin、sotagliflozin 亦訂 3 天。":""}`);
+    P.notes.push("正常血糖 DKA：血糖 &lt;250 mg/dL 合併 pH &lt;7.3、HCO₃⁻ &lt;18 mEq/L 與血/尿酮體上升；血糖不高不能排除。");
+    P.notes.push("Seki 2023（J Anesth，99 例系統性回顧）：已知停藥時間者皆停 &lt;3 天，無術前停 &gt;2 天者發生 SGLT2i 相關圍術期酮酸中毒。");
+    P.notes.push("用於心衰竭或 CKD 適應症者同樣適用；術後待臨床穩定、恢復正常飲食後再恢復。");
+    return P;
+  }
+  /* ======== Sulfonylurea ======== */
+  if(d==="su"){
+    P.src="hosp";
+    fill(P.drug,-1,0,"hold");fill(P.drug,1,5,"opt");P.labels[1]="進食後";
+    P.kpi=[["術前停藥","1 天","hold","最後一劑 Day −2"],["術後恢復","恢復正常進食","take",""],["主要風險","嚴重低血糖","hold",""]];
+    P.notes.push(`本院準則：術前停 1 天；術後恢復正常進食即可復藥。${R("本院 2026.04")}`);
+    P.notes.push("適用：acetohexamide、carbutamide、chlorpropamide、glibenclamide、glibornuride、gliclazide、glimepiride、glipizide、gliquidone、glisoxepide、metahexamide、tolazamide、tolbutamide。");
+    P.notes.push("AHA 2024 未針對 sulfonylurea 給建議；禁食期間低血糖風險高，長效品項（glibenclamide、chlorpropamide）與腎功能不全者更需注意。");
+    return P;
+  }
+  /* ======== Metformin ======== */
+  if(d==="metformin"){
+    fill(P.drug,-10,5,"take");
+    P.kpi=[["術前停藥","可繼續","take","AHA 2024（2a）"],["術後恢復","持續","take","腎功能惡化時再評估"],["本院準則","停 2 天","hold","術後 48 h、腎功能穩定後復藥"]];
+    P.notes.push(`糖尿病或葡萄糖耐受不良病人，圍術期繼續 metformin 以維持血糖控制是合理的。${R("AHA 7.8 Rec 3","COR 2a, LOE C-LD")}`);
+    P.notes.push("AHA 支持文字：&gt;10,600 名第 2 型糖尿病人之族群世代研究，目前使用 metformin 與乳酸中毒無關聯。");
+    P.notes.push("腎功能急性惡化、使用碘顯影劑、血行動力不穩或預期組織灌流不良時，仍應依仿單個別停用。");
+    return P;
+  }
+  /* ======== GLP-1 / GIP ======== */
+  if(d==="glpqd"||d==="glpqw"||d==="semapo"){
+    const wk=d==="glpqw";
+    if(wk){fill(P.drug,-7,0,"hold");P.labels[-7]="";}else{fill(P.drug,-1,0,"hold");}
+    fill(P.drug,1,5,"opt");P.labels[1]="進食後";
+    P.kpi=[["術前停藥",wk?"1 週":"1 天","hold",wk?"最後一次注射在 Day −8 以前":"術前一天起停"],["術後恢復","正常進食、無腸胃症狀","take",""],["主要風險","胃排空延遲→吸入","hold",""]];
+    P.notes.push(`AHA 2024 引用 ASA 共識：每週型於擇期手術前停 &gt;1 週，每日型於術前一天停，以降低胃內容物吸入風險。${R("AHA 7.8 synopsis")}${R("ASA 2024")}`);
+    P.alerts.push(["blue","較新實證傾向「繼續用藥＋術前飲食調整」",`2024 多學會指引（ASA、AGA、ASMBS、ISPOR、SAGES）：多數病人可繼續，僅高風險者（劑量調升期、高劑量、有腸胃症狀）選擇性停藥；術前 24 h 流質飲食。2025 ADS/ANZCA/GESA/NACOS（本院準則亦引用）：<b>建議繼續使用</b>，術前 24 h 清流質＋標準 6 h 禁食；無法完成者以胃超音波評估；並表示目前<b>無法建議足以讓胃排空恢復的停藥時間</b>。請與麻醉科確認院內採用哪一版。`]);
+    P.notes.push("本院品項分類：QW — albiglutide、dulaglutide、exenatide（週劑型）、semaglutide 注射、tirzepatide；QD — beinaglutide、IDegLira、iGlarLixi、liraglutide、lixisenatide、pramlintide；口服 semaglutide 停 1 天。");
+    P.notes.push("藥師核對提醒：exenatide 亦有 BID 劑型、beinaglutide 為每日三次、pramlintide 為 amylin 類似物（非 GLP-1 RA），分類時請依實際處方劑型。");
+    P.notes.push("術後恢復：恢復正常進食，無嚴重噁心、嘔吐、腹脹，且腸胃蠕動正常後。");
+    return P;
+  }
+  /* ======== TCM / supplements ======== */
+  if(d==="tcm"||d==="supp"){
+    P.src="hosp";
+    if(d==="tcm"){fill(P.drug,-3,0,"hold");}else{fill(P.drug,-7,0,"hold");fill(P.drug,-14,-8,"opt");}
+    fill(P.drug,1,5,"opt");P.labels[1]="止血後";
+    P.kpi=[["術前停藥",d==="tcm"?"3 天":"7–14 天","hold",d==="tcm"?"最後一劑 Day −4":"最後一劑 Day −8 至 −15"],["術後恢復","適當止血後","take",""],["依據","本院準則","opt","CHEST / AHA 未涵蓋"]];
+    if(d==="tcm"){
+      P.notes.push(`本院準則：三七（川七，飲片/生藥粉）、川芎、丹參、紅花、當歸（濃縮中藥/飲片）、疏經活血湯（濃縮中藥）術前停 3 天；術後適當止血後即可恢復。${R("本院 2026.04")}`);
+      P.notes.push("本院引用文獻包括丹參成分對 aspirin 代謝之影響、疏經活血湯與抗凝血藥之交互作用，以及 Fung 2017（Phytomedicine）薑黃、當歸、人參之抗凝血效果 RCT。");
+      P.notes.push("若病人同時使用 warfarin 或抗血小板藥，丹參、當歸等可能增強抗栓作用，INR 需一併追蹤。");
+    }else{
+      P.notes.push(`本院準則：銀杏、深海魚油、納豆、紅景天、薑黃、大蒜精、亞麻籽/亞麻籽油術前停 7–14 天。${R("本院 2026.04")}`);
+      P.notes.push("Ang-Lee 2001（JAMA）：大蒜、銀杏、人參可直接增加出血風險；術前評估應主動詢問並記錄草藥與保健品使用。");
+      P.notes.push("本院未另訂保健品恢復時機；可比照中藥於適當止血後恢復。");
+    }
+    return P;
+  }
+  return P;
+}
+
+/* ---------- hospital guideline (員林基督教醫院 2026.04) ---------- */
+function hosp(P){
+  const s=SURG.find(x=>x.id===S.surg), r=s.r, d=S.drug, f=s.f||[], has=k=>f.includes(k);
+  const crcl=getCrcl(), H={row:null,lines:[],diffs:[],same:[]};
+  const stent=getStent(), dapt=S.dapt==="1", isStent=["bms","desacs","desccd","balloon"].includes(stent);
+  if(d==="warfarin"){
+    if(r==="M"){H.row={};fill(H.row,-10,5,"take");H.lines.push("輕微出血風險：INR 在治療範圍內則考慮不停藥。");H.same.push("極低出血風險不停 warfarin");return H;}
+    H.row={};fill(H.row,-5,-4,"opt");fill(H.row,-3,-1,"hold");H.row[0]="opt";fill(H.row,1,5,"take");H.rowLabels={0:"12–24h"};
+    H.lines.push("停藥至 INR &lt;1.5 再進行（3–5 天）：INR 超標 &gt;5 天、達標 5 天、未達標 3–4 天。");
+    H.lines.push("高栓塞風險：考慮 LMWH（CrCl ≥30 Q12H；&lt;30 QD）或 UFH（CrCl &lt;30、透析、住院病人）橋接，INR &lt;2 開始。LMWH 術前 12–24 h 停；UFH 術前 4–6 h 停。");
+    H.lines.push("術後止血後 12–24 h 恢復 warfarin；高栓塞風險併用 LMWH/UFH 至 INR 達治療範圍（低出血風險 24 h 內、高出血風險 48–72 h 開始，INR &gt;2 停）。");
+    H.diffs.push(`停藥天數：本院 3–5 天（依 INR 狀態）；CHEST 2022 建議 ≥5 天（Rec 1），並指出 5 天停藥僅約 7% 術前 INR &gt;1.5。`);
+    if(getTr()==="high")H.diffs.push(`LMWH 最後一劑：本院術前 12–24 h；CHEST 建議約 24 h 且給全日量一半（Rec 18、20）——術前 12 h 給藥者 &gt;90% 仍有抗凝效果、34% 達治療濃度。`);
+    H.same.push("高血栓風險才橋接、術後 24 h 內恢復 warfarin、橋接恢復時機（24 h / 48–72 h）、UFH 術前 ≥4 h 停");
+    return H;
+  }
+  if(XA.includes(d)||d==="dabigatran"){
+    const isD=d==="dabigatran";
+    if(r==="M"){H.lines.push("輕微出血風險：於服藥 12–24 小時後進行手術；術後止血後 6 小時可恢復。");H.same.push("極低出血風險原則上不中斷（CHEST/AHA 可考慮略過當天劑量）；術後最早 6 h 恢復（AHA 7.6 支持文字）");return H;}
+    let h=null,na=false;
+    if(isNaN(crcl))h=null;
+    else if(isD){if(crcl<30)na=true;else if(crcl>=80)h=r==="H"?48:24;else if(crcl>=50)h=r==="H"?72:36;else h=r==="H"?96:48;}
+    else{if(crcl<15)na=true;else if(crcl<30)h=r==="H"?48:36;else h=r==="H"?48:24;}
+    H.lines.push(na?`${OV.lab||"CrCl "+crcl}：本院建議不使用 ${isD?"dabigatran（CrCl &lt;30）":"Xa 抑制劑（CrCl &lt;15）"}。`:(h?`${OV.lab||"CrCl "+crcl}：最後一劑距手術 ≥${h} 小時（依 EHRA 2018 表）。`:"請輸入 CrCl 以查本院時數。"));
+    H.lines.push(`術後止血後恢復：高出血風險 48–72 h、低出血風險 24 h。停用期間不需橋接。`);
+    if(isD&&crcl>=50&&crcl<80&&r==="H")H.diffs.push("Dabigatran CrCl 50–79、高出血風險：本院 ≥72 h；CHEST 2022 / AHA 2024 以 CrCl 50 為界，≥50 者停 2 天（約 60–68 h）。本院較保守約一天。");
+    if(!isD&&crcl>=15&&crcl<30)H.diffs.push("Xa 抑制劑 CrCl 15–29：本院低 ≥36 h / 高 ≥48 h；AHA 2024 Table 13（CrCl &lt;30）低–中停 2 天 / 高停 3 天，AHA 較保守。");
+    if(has("neuraxial"))H.diffs.push("椎管內麻醉：本院未另訂；AHA 2024 建議 Xa 抑制劑 ≥3 天、dabigatran ≥4 天（CrCl &lt;50 為 5–6 天）。");
+    if(isD&&crcl<30)H.diffs.push("Dabigatran CrCl &lt;30：本院不建議使用；CHEST / PAUSE 亦排除此族群。");
+    H.same.push("依出血風險與腎功能分層、不橋接、術後 24 h / 48–72 h 恢復");
+    return H;
+  }
+  if(d==="lmwh"){
+    H.lines.push("橋接 LMWH（CrCl ≥30 Q12H；&lt;30 QD）：術前 12–24 h 停（最後一劑）；術後低出血風險 24 h 內、高出血風險 48–72 h 恢復。");
+    H.diffs.push("術前最後一劑：本院 12–24 h；CHEST 建議約 24 h 並於 Day −1 給全日量一半（Rec 18、20）。");
+    H.same.push("術後恢復時機");return H;
+  }
+  if(d==="ufh"){H.lines.push("UFH（CrCl &lt;30、透析、住院病人）：術前 4–6 h 停；術後止血後恢復。");H.same.push("術前 ≥4 h 停（CHEST Rec 16）");return H;}
+  if(d==="aspirin"){
+    const keep=isStent&&dapt;
+    H.row={};
+    if(keep){fill(H.row,-10,5,"take");}else{fill(H.row,-10,-6,"opt");fill(H.row,-5,0,"hold");H.row[1]="take";fill(H.row,2,5,"take");H.rowLabels={1:"24h"};}
+    H.lines.push("高栓塞風險：非心臟且非緊急手術 → 建議風險下降至中度再進行；緊急手術 → 考慮續用抗血小板藥物。");
+    H.lines.push("中/低栓塞風險：aspirin 停 5–10 天；同時使用兩種以上抗血小板藥物者，持續 aspirin、停 P2Y12 抑制劑。術後 24 h 內恢復。");
+    if(!keep)H.diffs.push("Aspirin 停 5–10 天 vs CHEST 2022 非心臟手術<b>建議繼續</b>（Rec 29a，中等確定性）；若需停，≤7 天即可（Rec 29b），血小板功能約 4 天恢復（AHA T12）。");
+    if(has("dental")||has("derm")||has("ophtho"))H.diffs.push("本院表格未區分小型處置；CHEST Rec 41–43：小型牙科、皮膚、眼科處置建議繼續 aspirin。");
+    if(has("cabg"))H.diffs.push("CABG：CHEST Rec 34 建議繼續 aspirin。");
+    H.same.push("DAPT 者保留 aspirin、停 P2Y12；高血栓風險擇期手術延後；術後 24 h 內恢復");
+    return H;
+  }
+  if(P2Y.includes(d)){
+    const c={clopidogrel:[5,7],ticagrelor:[5,7],prasugrel:[7,14]}[d];
+    H.row={};fill(H.row,-c[1],-c[0]-1,"opt");fill(H.row,-c[0],0,"hold");fill(H.row,1,2,"opt");fill(H.row,3,5,"take");H.rowLabels={1:"24–72h"};
+    H.lines.push(`中/低栓塞風險：${DNAME[d]} 停 ${c[0]}–${c[1]} 天；高栓塞風險之擇期非心臟手術建議延後。術後 24–72 h 恢復。`);
+    if(d==="ticagrelor")H.diffs.push("Ticagrelor：本院 5–7 天；CHEST 3–5 天（Rec 31）、AHA T12 功能恢復 3–5 天。");
+    if(d==="clopidogrel")H.diffs.push("Clopidogrel：本院 5–7 天；CHEST 5 天（Rec 30）。差異小，上限較長。");
+    if(d==="prasugrel")H.diffs.push("Prasugrel：本院 7–14 天；CHEST 7 天（Rec 32）、AHA T12 7–10 天。");
+    H.diffs.push("術後恢復：本院 24–72 h；CHEST 建議 ≤24 h 以維持劑量恢復（Rec 33、35）。");
+    if(has("dental")||has("derm")||has("ophtho"))H.diffs.push("本院表格未區分小型處置；CHEST Rec 41–43 建議單一抗血小板可繼續。");
+    H.same.push("DAPT 者保留 aspirin、停 P2Y12");
+    return H;
+  }
+  if(d==="sglt2"||d==="ertu"){H.row={};const n=d==="ertu"?4:3;fill(H.row,-n,0,"hold");fill(H.row,1,5,"opt");H.lines.push(`停 ${n} 天；恢復正常進食及飲水即可恢復。`);H.same.push("停藥天數與恢復時機與 AHA 2024 一致");return H;}
+  if(d==="metformin"){H.row={};fill(H.row,-2,1,"hold");H.row[2]="opt";fill(H.row,3,5,"take");H.rowLabels={2:"48h"};H.lines.push("停 2 天（含複方）；術後 48 h、腎功能回復正常或穩定後復藥。依據：Bahrain Med Bull 2025 回顧、Ankomin 仿單。");H.diffs.push("AHA 2024 認為圍術期<b>繼續</b> metformin 合理（COR 2a）；本院常規停 2 天。可考慮改為僅在腎功能惡化、顯影劑或血行動力不穩時停用。");return H;}
+  if(d==="glpqd"||d==="glpqw"||d==="semapo"){H.row={};if(d==="glpqw")fill(H.row,-7,0,"hold");else fill(H.row,-1,0,"hold");fill(H.row,1,5,"opt");H.lines.push("QD 停 1 天、QW 停 1 週（口服 semaglutide 停 1 天）；恢復正常進食、無腸胃不適且蠕動正常後恢復。");H.same.push("與 AHA 2024 引用之 ASA 2023 共識一致");H.diffs.push("本院引用的 ADS/ANZCA 2025 實際建議<b>繼續</b> GLP-1 RA（術前 24 h 清流質），並表示無法建議有效停藥期；2024 多學會指引亦改為多數病人可繼續。");return H;}
+  return H;
+}
+
+/* ---------- render result ---------- */
+function fmtDate(base,off){if(!base)return"";const d=new Date(base.getTime());d.setDate(d.getDate()+off);return`${d.getMonth()+1}/${d.getDate()}（${"日一二三四五六"[d.getDay()]}）`;}
+const LBL={take:"服用",hold:"停",opt:"視情況",full:"全量",half:"½",low:"預防量",none:""};
+const ANTICOAG=["warfarin","apixaban","rivaroxaban","edoxaban","dabigatran","lmwh","ufh"], DOACS=["apixaban","rivaroxaban","edoxaban","dabigatran"];
+const ALLAP=["aspirin","clopidogrel","ticagrelor","prasugrel","cilostazol","dipyridamole","ticlopidine"];
+function firstHold(o){let m=null;if(!o)return null;Object.keys(o).map(Number).forEach(d=>{if(d<=0&&o[d]==="hold"&&(m===null||d<m))m=d;});return m;}
+function combos(sel){
+  const A=[], ac=sel.filter(d=>ANTICOAG.includes(d)), ap=sel.filter(d=>ALLAP.includes(d)), p2=sel.filter(d=>P2Y.includes(d)||d==="ticlopidine");
+  const acCore=ac.filter(d=>d!=="lmwh"&&d!=="ufh");
+  if(acCore.length>1)A.push(["red","重複口服抗凝劑",`同時選了 ${acCore.map(d=>DNAME[d]).join("、")}。長期併用兩種口服抗凝劑並不常見，請先確認處方（是否為轉換期）。`]);
+  if(acCore.some(d=>DOACS.includes(d))&&(sel.includes("lmwh")||sel.includes("ufh")))A.push(["amber","DOAC 合併肝素","DOAC 停用期間不建議橋接（CHEST Rec 26）；若肝素是術後 VTE 預防用途，請改依預防劑量處理。"]);
+  if(sel.includes("warfarin")&&(sel.includes("lmwh")||sel.includes("ufh")))A.push(["blue","Warfarin＋肝素","肝素列視為橋接用途：LMWH 列顯示其停用與恢復時間；是否需要橋接依血栓風險（表 1）決定。"]);
+  if(sel.includes("aspirin")&&p2.length)A.push(["blue","雙重抗血小板（DAPT）",`指引與本院一致：<b>繼續 aspirin、停 P2Y12 抑制劑</b>（CHEST Rec 38；本院準則）。支架時間點請於「病人因子」設定；DES &lt;3 個月或 BMS &lt;30 天且手術無法延後者，圍術期應盡量維持 DAPT（AHA Rec 8）。`]);
+  if(p2.length>1)A.push(["red","重複 P2Y12 抑制劑",`${p2.map(d=>DNAME[d]).join("、")} 不應併用，請確認處方。`]);
+  if(acCore.length&&ap.length)A.push(["amber",ap.length>1?"三重抗栓（抗凝＋兩種抗血小板）":"抗凝＋抗血小板合併使用",`各藥依其本身規則停藥與恢復；指引未提供合併時的共同排程。出血風險相加，術後恢復時可考慮<b>分次恢復</b>，先恢復臨床上最必要者，並由心臟科／血液科決定是否需保留抗血小板。${sel.includes("aspirin")&&ap.length===1?"":""}`]);
+  if((sel.includes("tcm")||sel.includes("supp"))&&(ac.length||ap.length))A.push(["amber","中藥 / 保健品＋抗栓藥","活血中藥與銀杏、魚油等可能加成出血風險；併用 warfarin 者 INR 波動需一併追蹤。"]);
+  if(sel.includes("sglt2")&&sel.includes("ertu"))A.push(["red","重複 SGLT2i","請確認處方。"]);
+  const glp=sel.filter(d=>["glpqd","glpqw","semapo"].includes(d));if(glp.length>1)A.push(["red","重複 GLP-1 RA","請確認處方。"]);
+  return A;
+}
+function update(){
+  const sel=[...S.drugs];
+  if(!sel.length){["pt-vka","pt-crcl","pt-pci-oac","pt-ap"].forEach(i=>$(i).hidden=true);$("ptStep").hidden=true;$("out").innerHTML=`<div class="rhead"><h2>尚未選擇藥物</h2></div><p class="hint">請在左側「選擇藥物」點選一種或多種藥物（可複選），這裡會依同一手術日列出各藥物的停藥與恢復時間。</p>`;return;}
+  const any=f=>sel.some(f);
+  $("pt-vka").hidden=!sel.includes("warfarin");
+  $("pt-crcl").hidden=!any(d=>DOACS.includes(d)||d==="lmwh");
+  $("pt-pci-oac").hidden=!any(d=>d==="warfarin"||DOACS.includes(d));
+  $("pt-ap").hidden=!any(d=>AP.includes(d));
+  $("pciTimeRow").hidden=!["balloon","bms","desacs","desccd"].includes($("stent").value);
+  $("ptStep").hidden=$("pt-vka").hidden&&$("pt-crcl").hidden&&$("pt-ap").hidden&&$("pt-pci-oac").hidden;
+
+  const s=SURG.find(x=>x.id===S.surg);
+  const crEmpty=isNaN(parseFloat($("crcl").value)), stV=$("stent").value;
+  const variants=d=>{
+    if(s.r!=="M"&&(XA.includes(d)||d==="dabigatran")&&crEmpty)return d==="dabigatran"?[{lab:"CrCl ≥80",crcl:90},{lab:"CrCl 50–79",crcl:60},{lab:"CrCl 30–49",crcl:40}]:[{lab:"CrCl ≥30",crcl:60},{lab:"CrCl 15–29",crcl:20}];
+    if(s.r!=="M"&&d==="warfarin"&&!S.tr)return[{lab:"低 / 中血栓風險",tr:"low"},{lab:"高血栓風險",tr:"high"}];
+    if(d==="aspirin"&&!stV&&s.r!=="M")return[{lab:"次級預防",stent:"noPCI"},{lab:"初級預防",stent:"primary"}];
+    return[null];};
+  const R=sel.flatMap(d=>variants(d).map(v=>{OV=v?{...v}:{};S.drug=d;const P=plan();const HB=hosp(P);OV={};return{d,v,nm:DNAME[d]+(v?`（${v.lab}）`:""),P,HB};}));
+  const miss=[];
+  if(sel.some(d=>XA.includes(d)||d==="dabigatran"||d==="lmwh")&&crEmpty)miss.push(["CrCl",sel.some(d=>XA.includes(d)||d==="dabigatran")?"DOAC 已依腎功能區間分列":"LMWH 注意事項以一般腎功能呈現"]);
+  if(sel.includes("warfarin")&&!S.tr)miss.push(["血栓栓塞風險","warfarin 已分列「低/中」與「高」兩種排程"]);
+  if(sel.includes("warfarin")&&!S.ind)miss.push(["抗凝適應症","引用條文以 CHEST Rec 5–7 概括"]);
+  if(sel.some(d=>AP.includes(d))&&!stV)miss.push(["抗血小板適應症 / 支架",sel.includes("aspirin")?"aspirin 已分列次級與初級預防；未顯示支架時機提醒":"未顯示支架時機提醒"]);
+  if(["balloon","bms","desacs","desccd"].includes(stV)&&isNaN(parseFloat($("pciMo").value)))miss.push(["距 PCI 時間","無法判斷手術時機是否安全"]);
+  if(["balloon","bms","desacs","desccd"].includes(stV)&&S.dapt===null)miss.push(["目前 DAPT","以「非 DAPT」處理"]);
+  const onlyNonBleed=sel.every(d=>["sglt2","ertu","su","metformin","glpqd","glpqw","semapo"].includes(d));
+  const dv=$("sdate")?$("sdate").value:DEF_DATE; const base=dv?new Date(dv+"T00:00:00"):null;
+
+  let h=`<div class="rhead"><h2>${sel.length>1?sel.length+" 種藥物":DNAME[sel[0]]}</h2><span class="vs">× ${esc(s.n)}</span>${onlyNonBleed?`<span class="badge M" style="background:var(--panel2);color:var(--ink2)">與出血風險無關</span>`:`<span class="badge ${s.r}">${RISK[s.r]}</span>`}</div>`;
+  if(s.note&&!onlyNonBleed)h+=`<div class="alert blue" style="font-size:13.5px">${s.note}</div>`;
+
+  // summary table (sorted by earliest stop)
+  const W0=R.map((x,i)=>({...x,i,fh:firstHold(x.P.drug)}));const gmin={};W0.forEach(x=>{const f=x.fh===null?1:x.fh;gmin[x.d]=Math.min(gmin[x.d]??9,f);});
+  const withFirst=W0.sort((a,b)=>(gmin[a.d]-gmin[b.d])||(sel.indexOf(a.d)-sel.indexOf(b.d))||(a.i-b.i));
+  if(R.length>1){
+    h+=`<h3 class="sec">停藥總表（依開始停藥日排序）</h3><div class="tbwrap"><table class="rt sum"><thead><tr><th>藥物</th><th>術前</th><th>開始停藥</th><th>術後恢復</th><th>依據</th><th>本院</th></tr></thead><tbody>`;
+    withFirst.forEach(x=>{const k=x.P.kpi;const hs=x.HB.lines.length?(x.HB.diffs.length?`<span class="hstat diff">${x.HB.diffs.length} 處差異</span>`:`<span class="hstat ok">一致</span>`):(x.P.src==="hosp"?`<span class="hstat ok">本院為主</span>`:"—");
+      h+=`<tr><td><b>${x.nm}</b></td><td>${k[0]?k[0][1]:""}</td><td class="num">${x.fh===null?"—":"Day "+x.fh+(base?"<br>"+fmtDate(base,x.fh):"")}</td><td>${k[1]?k[1][1]:""}</td><td><span class="srcchip ${x.P.src==="hosp"?"hosp":""}">${x.P.src==="hosp"?"本院準則":"指引"}</span></td><td>${hs}</td></tr>`;});
+    h+=`</tbody></table></div>`;
+  }else{
+    const P=R[0].P;
+    h+=`<div class="kpis">`+P.kpi.map(k=>`<div class="kpi ${k[2]}"><div class="k">${k[0]}</div><div class="v">${k[1]}</div><div class="s">${k[3]||""}</div></div>`).join("")+`</div>`;
+  }
+  if(miss.length)h=h.replace('</div>','</div><div class="alert amber"><b class="t">病人因子未填：結果已依可能情況分列</b><ul class="notes">'+miss.map(m=>`<li><b>${m[0]}</b>：${m[1]}</li>`).join("")+'</ul>填入後只顯示對應結果。</div>');
+  combos(sel).forEach(a=>{h+=`<div class="alert ${a[0]}"><b class="t">${a[1]}</b>${a[2]}</div>`});
+
+  // combined timeline
+  const nt=o=>o?Object.keys(o).map(Number).filter(d=>o[d]!=="take"&&o[d]!=="full").map(d=>d-1):[];
+  let first=Math.min(-7,...R.flatMap(x=>nt(x.P.drug).concat(nt(x.HB.row))));
+  if(!isFinite(first))first=-7; first=Math.max(first,-15);
+  const cols=[];for(let d=first;d<=4;d++)cols.push(d);
+  h+=`<h3 class="sec">停藥時間軸</h3><div class="datebar"><label for="sdate">手術日期</label><input type="date" id="sdate" value="${dv||""}"><span class="hint">輸入後顯示各天實際日期</span></div>`;
+  h+=`<div class="tlwrap"><table class="tl"><thead><tr><th class="rowl"></th>`+cols.map(d=>`<th class="${d===0?"d0":""}">${d===0?"OP":(d>0?"+"+d:d)}<span class="date">${base?fmtDate(base,d):""}</span></th>`).join("")+`</tr></thead><tbody>`;
+  let showL=false;
+  withFirst.forEach((x,i)=>{const P=x.P,HB=x.HB;
+    const lab=(P.isLmwhRow?"LMWH":DNAME[x.d])+`<span class="rsub">${x.v?x.v.lab+"・":""}${P.src==="hosp"?"本院準則":"指引"}</span>`;
+    h+=`<tr class="${i>0&&!(x.v&&withFirst[i-1].d===x.d)?"grp":""}"><th class="rowl">${lab}</th>`+cols.map(d=>{const st=P.drug[d]||"take";const l=(d===0&&P.labels[0])?P.labels[0]:(P.labels[d]&&st!=="hold"?P.labels[d]:LBL[st]);return`<td class="st-${st}${d===0?" d0":""}">${l}</td>`}).join("")+`</tr>`;
+    if(P.lmwh){showL=true;h+=`<tr><th class="rowl">LMWH 橋接<span class="rsub">指引</span></th>`+cols.map(d=>{const st=P.lmwh[d]||"none";return`<td class="st-${st}${d===0?" d0":""}">${LBL[st]}</td>`}).join("")+`</tr>`;}
+    if(P.isLmwhRow)showL=true;
+    if(HB.row){const rl=HB.rowLabels||{};h+=`<tr class="hrow"><th class="rowl">└ 本院準則<span class="rsub">員基 2026.04</span></th>`+cols.map(d=>{const st=HB.row[d]||"take";return`<td class="st-${st}${d===0?" d0":""}">${rl[d]&&st!=="hold"?rl[d]:LBL[st]}</td>`}).join("")+`</tr>`;}
+  });
+  h+=`</tbody></table></div><div class="legend"><span><i class="st-take"></i>服用</span><span><i class="st-hold"></i>停藥</span><span><i class="st-opt"></i>視情況 / 個別化</span>${showL?`<span><i class="st-full"></i>治療劑量肝素</span><span><i class="st-half"></i>全日量一半（早上）</span><span><i class="st-low"></i>預防劑量（可選）</span>`:""}<span>虛線列＝本院準則</span></div>`;
+
+  // per-drug details
+  h+=`<h3 class="sec">各藥物細節</h3>`;
+  withFirst.forEach(x=>{const P=x.P,HB=x.HB;
+    let b="";
+    if(R.length>1)b+=`<div class="kpis">`+P.kpi.map(k=>`<div class="kpi ${k[2]}"><div class="k">${k[0]}</div><div class="v">${k[1]}</div><div class="s">${k[3]||""}</div></div>`).join("")+`</div>`;
+    P.alerts.forEach(a=>{b+=`<div class="alert ${a[0]}"><b class="t">${a[1]}</b>${a[2]}</div>`});
+    if(P.hourly)b+=`<div class="hourlbl"><span>−8h</span><span>−6h</span><span>−4h</span><span>OP</span><span>+6h</span><span>+12h</span><span>+18h</span><span>+24h</span></div><div class="hourbar"><div class="st-full">輸注</div><div class="st-full">輸注</div><div class="st-hold">停</div><div class="st-hold" style="outline:2px solid var(--ink);outline-offset:-2px">手術</div><div class="st-hold">停</div><div class="st-hold">停</div><div class="st-hold">停</div><div class="st-take">恢復</div></div>`;
+    if(HB.lines.length){const st=HB.diffs.length?`<span class="hstat diff">與指引有 ${HB.diffs.length} 處差異</span>`:`<span class="hstat ok">與指引一致</span>`;
+      b+=`<div class="hosp" style="margin:8px 0"><b style="font-size:13px">本院準則對照</b>　${st}<ul class="notes">`+HB.lines.map(n=>`<li>${n}</li>`).join("")+`</ul>`;
+      if(HB.diffs.length)b+=`<div class="alert amber" style="margin-top:8px"><b class="t">差異處</b><ul class="notes">`+HB.diffs.map(n=>`<li>${n}</li>`).join("")+`</ul></div>`;
+      if(HB.same.length)b+=`<p class="hint">一致處：${HB.same.join("；")}。</p>`;b+=`</div>`;}
+    if(P.notes.length)b+=`<ul class="notes">`+P.notes.map(n=>`<li>${n}</li>`).join("")+`</ul>`;
+    h+=`<details class="drugd"${sel.length===1||x===withFirst[0]&&sel.length<=2?" open":""}><summary><b>${x.nm}</b><span class="srcchip ${P.src==="hosp"?"hosp":""}">${P.src==="hosp"?"依據：本院準則":"依據：CHEST 2022 / AHA 2024"}</span>${HB.diffs.length?`<span class="hstat diff">本院 ${HB.diffs.length} 處差異</span>`:""}</summary><div class="dbody">${b}</div></details>`;
+  });
+  h+=`<p class="hint" style="margin-top:12px">Day 0 = 手術日；Day −1 = 手術前一天。「停 N 天」指術前 N 個完整日不服藥，手術當天亦不服。複選時各藥物分別依其指引與本院規則排程，並以同一手術日對齊。</p>`;
+  const prev=$("sdate")?$("sdate").value:DEF_DATE;
+  $("out").innerHTML=h;
+  if($("sdate")){$("sdate").value=prev;$("sdate").addEventListener("change",()=>{DEF_DATE=$("sdate").value;update();});}
+}
+let DEF_DATE=(()=>{const d=new Date();d.setDate(d.getDate()+10);return d.toISOString().slice(0,10)})();
+
+/* ---------- static reference content ---------- */
+function renderBleed(){
+  $("bleedBody").innerHTML=["H","L","M"].map(r=>`<tr class="rg-${r} rrow"><td><span class="badge ${r}">${RISK[r]}</span><br><span class="hint">${RISKD[r]}</span></td><td>${SURG.filter(s=>s.r===r).map(s=>esc(s.n)+(s.src?`<span class="ref">${s.src}</span>`:"")).join("、")}</td></tr>`).join("")+
+  `<tr><td colspan="2" class="hint">高風險＝術前需 4–5 個半衰期、幾無殘餘抗凝；低–中風險允許些微殘餘（2–3 個半衰期）；極低風險可在完整抗凝下進行。冠狀動脈攝影經橈動脈可視為極低風險。大型骨科手術＝全髖、全膝、肩關節置換（關節鏡與手/足手術屬低–中風險）。部分手術（如疝氣修補）依複雜度可歸為低–中或高風險。</td></tr>`;
+}
+const TR_HELP={af:"AF：CHA₂DS₂-VASc ≥7（或 CHADS₂ 5–6）、3 個月內中風/TIA、風濕性瓣膜病 → 高；5–6 → 中；1–4 且無中風史 → 低。",mhv:"機械瓣：二尖瓣合併中風危險因子、籠球/傾斜碟瓣、3 個月內中風/TIA → 高；二尖瓣無危險因子、雙葉 AVR 合併危險因子 → 中；雙葉 AVR 無危險因子 → 低。",vte:"VTE：3 個月內（尤其 1 個月內）、嚴重血栓傾向、抗磷脂抗體、高 VTE 風險癌症 → 高；3–12 個月、復發、非嚴重血栓傾向、活動性癌症 → 中；>12 個月 → 低。"};
+const TR_ALL=Object.values(TR_HELP).join("　");
+const PAPERS=[
+ {t:"Perioperative Management of Antithrombotic Therapy: An American College of Chest Physicians Clinical Practice Guideline",m:"Douketis JD, et al. Chest. 2022;162(5):e207–e243",ty:"指引（主要依據）",k:"44 項 GRADE 建議，涵蓋 VKA、橋接、DOAC、抗血小板與小型處置。",doi:"10.1016/j.chest.2022.07.025"},
+ {t:"2024 AHA/ACC/ACS/ASNC/HRS/SCA/SCCT/SCMR/SVM Guideline for Perioperative Cardiovascular Management for Noncardiac Surgery",m:"Thompson A, et al. Circulation. 2024;150:e351–e442",ty:"指引（主要依據）",k:"Table 13 DOAC/VKA 排程、Table 14 血栓風險、Figure 5 PCI 後手術時機。",doi:"10.1161/CIR.0000000000001285"},
+ {t:"Perioperative Management of Patients With Atrial Fibrillation Receiving a Direct Oral Anticoagulant (PAUSE)",m:"Douketis JD, et al. JAMA Intern Med. 2019;179(11):1469–1478 · PMID 31380891",ty:"前瞻性世代研究 n=3007",k:"低出血風險停 1 天、高風險停 2 天，不橋接、不驗血：30 天大出血 0.90–1.85%，動脈血栓 0.16–0.60%。",doi:"10.1001/jamainternmed.2019.2431"},
+ {t:"Perioperative Bridging Anticoagulation in Patients with Atrial Fibrillation (BRIDGE)",m:"Douketis JD, et al. N Engl J Med. 2015;373(9):823–833 · PMID 26095867",ty:"RCT n=1884",k:"不橋接之動脈血栓 0.4% vs 0.3%（非劣性）；大出血 1.3% vs 3.2%（RR 0.41）。",doi:"10.1056/NEJMoa1501035"},
+ {t:"Postoperative low molecular weight heparin bridging treatment for patients at high risk of arterial thromboembolism (PERIOP2)",m:"Kovacs MJ, et al. BMJ. 2021;373:n1205 · PMID 34108229",ty:"RCT n=1471",k:"AF/機械瓣膜術後 dalteparin vs placebo：90 天血栓 1.0% vs 1.2%，大出血 1.3% vs 2.0%，皆無顯著差異。",doi:"10.1136/bmj.n1205"},
+ {t:"Pacemaker or defibrillator surgery without interruption of anticoagulation (BRUISE CONTROL)",m:"Birnie DH, et al. N Engl J Med. 2013;368(22):2084–2093 · PMID 23659733",ty:"RCT n=681",k:"繼續 warfarin 之囊袋血腫 3.5% vs 肝素橋接 16.0%（RR 0.19）。",doi:"10.1056/NEJMoa1302946"},
+ {t:"Aspirin in patients undergoing noncardiac surgery (POISE-2)",m:"Devereaux PJ, et al. N Engl J Med. 2014;370(16):1494–1503 · PMID 24679062",ty:"RCT n=10,010",k:"圍術期 aspirin 未降低死亡/非致死 MI（7.0% vs 7.1%），大出血增加（4.6% vs 3.8%，HR 1.23）。",doi:"10.1056/NEJMoa1401105"},
+ {t:"2022 ESC Guidelines on cardiovascular assessment and management of patients undergoing non-cardiac surgery",m:"Halvorsen S, et al. Eur Heart J. 2022;43(39):3826–3924 · PMID 36017553",ty:"指引（歐洲觀點）",k:"可與 AHA 2024 對照 DOAC 停藥與 PCI 後手術時機之歐洲建議。",doi:"10.1093/eurheartj/ehac270"},
+ {t:"2021 EHRA Practical Guide on the Use of Non-Vitamin K Antagonist Oral Anticoagulants in Patients with Atrial Fibrillation",m:"Steffel J, et al. Europace. 2021;23(10):1612–1676 · PMID 33895845",ty:"實務指南",k:"提供各 DOAC 依腎功能分層之停藥時間與交互作用表，適合藥師核對。",doi:"10.1093/europace/euab065"},
+ {t:"Regional anesthesia in the patient receiving antithrombotic or thrombolytic therapy: ASRA Evidence-Based Guidelines (fifth edition)",m:"Kopp SL, et al. Reg Anesth Pain Med. 2025 · PMID 39880411",ty:"指引（椎管內麻醉）",k:"椎管內麻醉/導管之抗栓停藥間隔（改用 low/high dose 分類），較 CHEST/AHA 保守；神經阻斷前請以此為準。",doi:"10.1136/rapm-2024-105766"},
+ {t:"Sodium-glucose cotransporter 2 inhibitor-associated perioperative ketoacidosis: a systematic review of case reports",m:"Seki H, et al. J Anesth. 2023;37(3):465–473 · PMID 36849747",ty:"系統性回顧（99 例）",k:"已知停藥時間者皆於術前停 <3 天；無停 >2 天者發生酮酸中毒，支持術前停 ≥3 天。（本院準則亦引用）",doi:"10.1007/s00540-023-03174-8"},
+ {t:"ASA Consensus-based Guidance on Preoperative Management of Patients on Glucagon-like Peptide-1 Receptor Agonists",m:"Ushakumari DS, Sladen RN. Anesthesiology. 2024;140(2):346–348 · PMID 37982170",ty:"共識（本院準則引用）",k:"每週型停 1 週、每日型手術當天停；AHA 2024 引用此共識。",doi:"10.1097/ALN.0000000000004776"},
+ {t:"Multisociety Clinical Practice Guidance for the Safe Use of GLP-1 Receptor Agonists in the Perioperative Period",m:"Kindel TL, et al. Clin Gastroenterol Hepatol. 2025;23(12):2083–2085 · PMID 39480373（同時刊於 Surg Endosc、SOARD）",ty:"多學會指引 2024",k:"ASA、AGA、ASMBS、ISPOR、SAGES 共同發表，取代 2023 ASA 共識：多數病人可繼續，高風險者選擇性停藥，術前 24 h 流質飲食。（PubMed 無摘要，依原文）",doi:"10.1016/j.cgh.2024.10.003"},
+ {t:"2025 ADS/ANZCA/GESA/NACOS clinical practice recommendations on the peri-procedural use of GLP-1/GIP receptor agonists",m:"Hocking SL, et al. Anaesth Intensive Care. 2025;53(5):300–306 · PMID 40814081",ty:"指引（本院準則引用）",k:"建議圍術期繼續 GLP-1 RA 與 GLP-1/GIP RA；術前 24 h 清流質＋標準 6 h 禁食；無法建議足以恢復胃排空的停藥期。",doi:"10.1177/0310057X251355288"},
+ {t:"Herbal medicines and perioperative care",m:"Ang-Lee MK, Moss J, Yuan CS. JAMA. 2001;286(2):208–216 · PMID 11448284",ty:"回顧",k:"大蒜、銀杏、人參可直接增加出血；術前應主動詢問並記錄草藥使用。",doi:"10.1001/jama.286.2.208"}
+];
+function renderPapers(){
+  $("paperCards").innerHTML=PAPERS.map(p=>`<div class="pcard"><span class="ptype">${p.ty}</span><span class="pt">${esc(p.t)}</span><span class="pm">${esc(p.m)}</span><span class="pk">${p.k}</span><a href="https://doi.org/${p.doi}" target="_blank" rel="noopener">doi:${p.doi}</a></div>`).join("");
+}
+
+/* ---------- events ---------- */
+$("surgs").addEventListener("click",e=>{const b=e.target.closest(".sbtn");if(!b)return;S.surg=b.dataset.id;renderSurg();update();});
+$("drugs").addEventListener("click",e=>{const b=e.target.closest(".dbtn");if(!b)return;const id=b.dataset.id;if(S.drugs.has(id))S.drugs.delete(id);else S.drugs.add(id);renderDrugs();update();});
+$("clearDrugs").addEventListener("click",()=>{S.drugs=new Set();renderDrugs();update();});
+$("q").addEventListener("input",e=>{S.q=e.target.value;renderSurg();});
+segBind("indSeg","ind");segBind("trSeg","tr");segBind("daptSeg","dapt");
+["crcl","stent","pciMo","timeSens","oacPci"].forEach(id=>{$(id).addEventListener("input",update);$(id).addEventListener("change",update);});
+$("indSeg").addEventListener("click",()=>{$("trHelp").textContent=TR_HELP[S.ind]||TR_ALL});
+function cg(){const a=+$("cgAge").value,w=+$("cgWt").value,c=+$("cgScr").value;if(a&&w&&c){let v=(140-a)*w/(72*c);if($("cgSex").value==="f")v*=0.85;v=Math.round(v);$("crcl").value=v;$("cgOut").textContent=`CrCl ≈ ${v} mL/min（以實際體重計算）`;update();}}
+["cgAge","cgWt","cgScr","cgSex"].forEach(id=>$(id).addEventListener("input",cg));
+
+function showTab(t){const a=t==="appx";$("tab-tool").hidden=a;$("tab-appx").hidden=!a;$("t-tool").setAttribute("aria-selected",!a);$("t-appx").setAttribute("aria-selected",a);}
+$("t-tool").addEventListener("click",()=>showTab("tool"));$("t-appx").addEventListener("click",()=>showTab("appx"));
+document.addEventListener("click",e=>{const a=e.target.closest("a[data-goto]");if(!a)return;e.preventDefault();showTab("appx");const el=$(a.dataset.goto);if(el)el.scrollIntoView({block:"start"});});
+if(location.hash==="#appendix")showTab("appx");
+$("trHelp").textContent=TR_ALL;
+renderSurg();renderDrugs();renderBleed();renderPapers();update();
+})();
+</script>
+
+</body>
+</html>
