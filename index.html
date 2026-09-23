@@ -155,6 +155,9 @@ table.rt td.num{font-variant-numeric:tabular-nums;font-family:var(--mono);font-s
 .pcard .pk{font-size:13px}
 .pcard a{color:var(--accent);font-family:var(--mono);font-size:12px;word-break:break-all}
 .ptype{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.06em}
+.contact{margin-top:10px;padding:10px 14px;border:2px solid var(--accent);border-radius:8px;background:var(--accent-soft);color:var(--ink);font-size:14px;font-weight:700;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.contact .mail{font-family:var(--mono);color:var(--accent);user-select:all}
+.contact button{font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:1px solid var(--accent);background:var(--panel);color:var(--accent);border-radius:4px;padding:1px 10px}
 footer{margin-top:30px;font-size:12px;color:var(--ink2);border-top:1px solid var(--line);padding-top:12px}
 .linkbtn{margin-left:auto;font:inherit;font-size:12px;color:var(--accent);background:none;border:1px solid var(--line);border-radius:4px;padding:1px 8px;cursor:pointer}
 .dbtn[aria-pressed=true]::before{content:"✓ ";}
@@ -361,7 +364,8 @@ nav.tabs button[aria-selected=true]:hover{background:var(--accent)}
 
 </div>
 
-<footer>資料來源：Douketis JD, et al. CHEST 2022;162(5):e207–e243（含 CHEST 2023;164(1):267 勘誤）；Thompson A, et al. Circulation 2024;150:e351–e442；員林基督教醫院 手術/侵入性處置風險藥品停藥及恢復時機（2026.04）。其他文獻經 PubMed 檢索。版本日期 2026-09-23。</footer>
+<footer>資料來源：Douketis JD, et al. CHEST 2022;162(5):e207–e243（含 CHEST 2023;164(1):267 勘誤）；Thompson A, et al. Circulation 2024;150:e351–e442；員林基督教醫院 手術/侵入性處置風險藥品停藥及恢復時機（2026.04）。其他文獻經 PubMed 檢索。版本日期 2026-09-23。
+<div class="contact">若有臨床上疑慮需討論，請與我聯絡：<span class="mail" id="mail">1520396@cch.org.tw</span><button type="button" id="copyMail">複製</button></div></footer>
 </div>
 
 <script>
@@ -924,6 +928,7 @@ function showTab(t){const a=t==="appx";$("tab-tool").hidden=a;$("tab-appx").hidd
 $("t-tool").addEventListener("click",()=>showTab("tool"));$("t-appx").addEventListener("click",()=>showTab("appx"));
 document.addEventListener("click",e=>{const a=e.target.closest("a[data-goto]");if(!a)return;e.preventDefault();showTab("appx");const el=$(a.dataset.goto);if(el)el.scrollIntoView({block:"start"});});
 if(location.hash==="#appendix")showTab("appx");
+$("copyMail").addEventListener("click",()=>{const b=$("copyMail"),t="1520396@cch.org.tw";const ok=()=>{b.textContent="已複製";setTimeout(()=>b.textContent="複製",1500)};const fb=()=>{const r=document.createRange();r.selectNodeContents($("mail"));const sel=getSelection();sel.removeAllRanges();sel.addRange(r);b.textContent="已選取，請按複製";};try{navigator.clipboard.writeText(t).then(ok,fb)}catch(e){fb()}});
 $("trHelp").textContent=TR_ALL;
 renderSurg();renderDrugs();renderBleed();renderPapers();update();
 })();
